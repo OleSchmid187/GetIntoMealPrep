@@ -34,7 +34,7 @@ services:
     environment:
       POSTGRES_DB: GetIntoMealPrepDb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: tzutzu123
     volumes:
       - pgdata:/var/lib/postgresql/data
 
