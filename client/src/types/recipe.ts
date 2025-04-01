@@ -27,7 +27,7 @@ export interface Ingredient {
     instructions: string;
     portionCount: number;
     difficulty: Difficulty;
-    calories: number;
+    caloriesPerServing: number;
     imageUrl?: string;
     ingredients?: {
       ingredient: Ingredient;

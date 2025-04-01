@@ -1,5 +1,5 @@
 import { Recipe } from "../../../../types/recipe";
-import { getImageUrl } from "../../../../utils/getImageUrl";
+import RecipeImage from "../../../../components/RecipeImage/RecipeImage.tsx";
 
 interface Props {
   recipe: Recipe;
@@ -11,15 +11,9 @@ function RecipeModal({ recipe, onClose }: Props) {
     <div className="recipe-modal" onClick={onClose}>
       <div className="recipe-modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>{recipe.name}</h2>
-        <img
-          src={getImageUrl(recipe.imageUrl)}
-          alt={recipe.name}
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).src = "/fallback.png";
-          }}
-        />
+        <RecipeImage src={recipe.imageUrl} alt={recipe.name} />
         <p><strong>Portionen:</strong> {recipe.portionCount}</p>
-        <p><strong>Kalorien:</strong> {recipe.calories} kcal</p>
+        <p><strong>Kalorien:</strong> {recipe.caloriesPerServing} kcal</p>
         <p><strong>Schwierigkeit:</strong> {recipe.difficulty}</p>
         <p><strong>Zubereitung:</strong></p>
         <p>{recipe.instructions}</p>

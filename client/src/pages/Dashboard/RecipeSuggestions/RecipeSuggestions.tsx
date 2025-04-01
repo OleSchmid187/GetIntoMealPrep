@@ -17,7 +17,7 @@ function RecipeSuggestions() {
 
   return (
     <div className="recipe-suggestions">
-      <h3>Probier doch mal folgende Rezeptee:</h3>
+      <h3>Probier doch mal folgende Rezepte:</h3>
       <div className="recipe-grid">
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} onSelect={() => setSelectedRecipe(recipe)} />

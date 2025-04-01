@@ -77,10 +77,11 @@
 }
 
 .recipe-modal-content img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
-  border-radius: 8px;
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 1rem 0;
 }
 
 .recipe-modal-content h2 {

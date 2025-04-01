@@ -1,5 +1,5 @@
 import { Recipe } from "../../../../types/recipe";
-import { getImageUrl } from "../../../../utils/getImageUrl";
+import RecipeImage from "../../../../components/RecipeImage/RecipeImage.tsx";
 
 interface Props {
   recipe: Recipe;
@@ -9,13 +9,7 @@ interface Props {
 function RecipeCard({ recipe, onSelect }: Props) {
   return (
     <div className="recipe-card" onClick={onSelect}>
-      <img
-        src={getImageUrl(recipe.imageUrl)}
-        alt={recipe.name}
-        onError={(e) => {
-          (e.currentTarget as HTMLImageElement).src = "/fallback.png";
-        }}
-      />
+      <RecipeImage src={recipe.imageUrl} alt={recipe.name} />
       <p>{recipe.name}</p>
     </div>
   );
