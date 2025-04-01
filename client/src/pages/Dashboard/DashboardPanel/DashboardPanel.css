@@ -1,32 +1,47 @@
 .dashboard-panel {
-    background-color: white;
-    margin: 0 auto 3rem;
-    width: 80vw;
-    max-width: 1200px;
-    height: 400px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  .dashboard-panel h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .dashboard-actions button {
-    margin: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--color-primary);
-    color: white;
-    cursor: pointer;
-  }
-  
-  .dashboard-actions button:hover {
-    background-color: var(--color-primary-dark);
-  }
-  
+  background-color: white;
+  margin: 2rem auto 3rem;
+  width: 90%;
+  max-width: 1200px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.dashboard-panel:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-panel h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1e1e1e;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.dashboard-actions button {
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-actions button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}

@@ -1,0 +1,32 @@
+.dashboard-cards {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .dashboard-card {
+    flex: 1 1 280px;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .dashboard-card h3 {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .dashboard-icon {
+    color: #4a90e2; /* Lighter blue color */
+  }

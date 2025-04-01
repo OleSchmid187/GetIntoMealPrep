@@ -1,0 +1,17 @@
+.dashboard-stats {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+  
+  .stat-item {
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat-item span {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  
