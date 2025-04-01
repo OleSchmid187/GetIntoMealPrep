@@ -1,0 +1,32 @@
+.home-cta-section {
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: var(--color-primary);
+    color: rgb(0, 0, 0);
+  }
+  
+  .home-cta-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .home-cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .home-cta-button {
+    background-color: var(--color-accent);
+    color: var(--color-button-text);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .home-cta-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }

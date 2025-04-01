@@ -1,0 +1,12 @@
+.dashboard-wrapper {
+    padding: 2rem;
+    background-color: var(--color-background);
+    min-height: 100vh;
+  }
+  
+  .dashboard-greeting {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }

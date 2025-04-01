@@ -1,0 +1,40 @@
+.ui-button {
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Sizes */
+.ui-button--small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.ui-button--medium {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+}
+
+.ui-button--large {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.1rem;
+}
+
+/* Colors (example) */
+.ui-button--primary {
+  background-color: var(--color-accent);
+  color: var(--color-button-text);
+}
+
+.ui-button--secondary {
+  background-color: #eee;
+  color: #333;
+}
+
+/* Hover */
+.ui-button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
