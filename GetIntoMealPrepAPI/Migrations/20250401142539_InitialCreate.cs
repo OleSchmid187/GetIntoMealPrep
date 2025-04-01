@@ -7,14 +7,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GetIntoMealPrepAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMealPrepSchema : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "MealPlans");
-
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -40,6 +37,7 @@ namespace GetIntoMealPrepAPI.Migrations
                     Protein = table.Column<float>(type: "real", nullable: false),
                     Fat = table.Column<float>(type: "real", nullable: false),
                     Carbs = table.Column<float>(type: "real", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: true),
                     SourceApiId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -145,21 +143,6 @@ namespace GetIntoMealPrepAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recipes");
-
-            migrationBuilder.CreateTable(
-                name: "MealPlans",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Title = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MealPlans", x => x.Id);
-                });
         }
     }
 }

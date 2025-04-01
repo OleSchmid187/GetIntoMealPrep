@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using GetIntoMealPrepAPI.Data;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // EF Core + PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // CORS für Vite-Frontend
 builder.Services.AddCors(options =>

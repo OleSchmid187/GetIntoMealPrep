@@ -16,6 +16,8 @@ public class Ingredient
     public float Fat { get; set; }
     public float Carbs { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     public string? SourceApiId { get; set; }
 
     public ICollection<RecipeIngredient> Recipes { get; set; } = new List<RecipeIngredient>();

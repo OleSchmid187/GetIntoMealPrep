@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GetIntoMealPrepAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250401132612_InitialMealPrepSchema")]
-    partial class InitialMealPrepSchema
+    [Migration("20250401142539_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace GetIntoMealPrepAPI.Migrations
 
                     b.Property<float>("Fat")
                         .HasColumnType("real");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
