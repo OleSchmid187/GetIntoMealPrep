@@ -19,6 +19,4 @@ public class Ingredient
     public string? ImageUrl { get; set; }
 
     public string? SourceApiId { get; set; }
-
-    public ICollection<RecipeIngredient> Recipes { get; set; } = new List<RecipeIngredient>();
 }

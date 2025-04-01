@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GetIntoMealPrepAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250401142539_InitialCreate")]
+    [Migration("20250401154735_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -179,7 +179,7 @@ namespace GetIntoMealPrepAPI.Migrations
             modelBuilder.Entity("GetIntoMealPrepAPI.Models.RecipeIngredient", b =>
                 {
                     b.HasOne("GetIntoMealPrepAPI.Models.Ingredient", "Ingredient")
-                        .WithMany("Recipes")
+                        .WithMany()
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -196,11 +196,6 @@ namespace GetIntoMealPrepAPI.Migrations
                 });
 
             modelBuilder.Entity("GetIntoMealPrepAPI.Models.Category", b =>
-                {
-                    b.Navigation("Recipes");
-                });
-
-            modelBuilder.Entity("GetIntoMealPrepAPI.Models.Ingredient", b =>
                 {
                     b.Navigation("Recipes");
                 });

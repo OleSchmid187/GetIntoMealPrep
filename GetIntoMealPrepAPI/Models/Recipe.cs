@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace GetIntoMealPrepAPI.Models;
 
@@ -23,6 +24,9 @@ public class Recipe
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+    [JsonIgnore]
     public ICollection<RecipeIngredient> Ingredients { get; set; } = new List<RecipeIngredient>();
+
+    [JsonIgnore]
     public ICollection<RecipeCategory> Categories { get; set; } = new List<RecipeCategory>();
 }

@@ -176,7 +176,7 @@ namespace GetIntoMealPrepAPI.Migrations
             modelBuilder.Entity("GetIntoMealPrepAPI.Models.RecipeIngredient", b =>
                 {
                     b.HasOne("GetIntoMealPrepAPI.Models.Ingredient", "Ingredient")
-                        .WithMany("Recipes")
+                        .WithMany()
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -193,11 +193,6 @@ namespace GetIntoMealPrepAPI.Migrations
                 });
 
             modelBuilder.Entity("GetIntoMealPrepAPI.Models.Category", b =>
-                {
-                    b.Navigation("Recipes");
-                });
-
-            modelBuilder.Entity("GetIntoMealPrepAPI.Models.Ingredient", b =>
                 {
                     b.Navigation("Recipes");
                 });
