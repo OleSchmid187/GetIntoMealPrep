@@ -73,4 +73,24 @@ public class RecipeController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("{id}/upload-image")]
+    public async Task<IActionResult> UploadImage(int id, IFormFile file)
+    {
+        var recipe = await _context.Recipes.FindAsync(id);
+        if (recipe == null) return NotFound();
+
+        var fileName = $"recipe_{recipe.Name.Replace(" ", "_").ToLower()}.png";
+        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "recipes");
+        Directory.CreateDirectory(folderPath);
+
+        var fullPath = Path.Combine(folderPath, fileName);
+        using var stream = new FileStream(fullPath, FileMode.Create);
+        await file.CopyToAsync(stream);
+
+        recipe.ImageUrl = $"/resources/recipes/{fileName}";
+        await _context.SaveChangesAsync();
+
+        return Ok(new { recipe.ImageUrl });
+    }
 }

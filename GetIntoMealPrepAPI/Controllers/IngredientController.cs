@@ -41,4 +41,24 @@ public class IngredientController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPost("{id}/upload-image")]
+    public async Task<IActionResult> UploadImage(int id, IFormFile file)
+    {
+        var ingredient = await _context.Ingredients.FindAsync(id);
+        if (ingredient == null) return NotFound();
+
+        var fileName = $"ingredient_{ingredient.Name.Replace(" ", "_").ToLower()}.png";
+        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ingredients");
+        Directory.CreateDirectory(folderPath);
+
+        var fullPath = Path.Combine(folderPath, fileName);
+        using var stream = new FileStream(fullPath, FileMode.Create);
+        await file.CopyToAsync(stream);
+
+        ingredient.ImageUrl = $"/resources/ingredients/{fileName}";
+        await _context.SaveChangesAsync();
+
+        return Ok(new { ingredient.ImageUrl });
+    }
 }

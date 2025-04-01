@@ -37,6 +37,19 @@ app.UseSwaggerUI(c =>
 
 app.UseCors("AllowFrontend");
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
+    RequestPath = "/resources"
+});
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    DbSeeder.Seed(db);
+}
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
