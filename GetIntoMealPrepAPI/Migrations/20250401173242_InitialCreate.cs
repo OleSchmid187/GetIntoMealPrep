@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -33,12 +32,11 @@ namespace GetIntoMealPrepAPI.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    CaloriesPer100g = table.Column<float>(type: "real", nullable: false),
+                    CaloriesPer100g = table.Column<int>(type: "integer", nullable: false),
                     Protein = table.Column<float>(type: "real", nullable: false),
                     Fat = table.Column<float>(type: "real", nullable: false),
                     Carbs = table.Column<float>(type: "real", nullable: false),
-                    ImageUrl = table.Column<string>(type: "text", nullable: true),
-                    SourceApiId = table.Column<string>(type: "text", nullable: true)
+                    ImageUrl = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,10 +53,9 @@ namespace GetIntoMealPrepAPI.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     Instructions = table.Column<string>(type: "text", nullable: false),
                     PortionCount = table.Column<int>(type: "integer", nullable: false),
-                    Difficulty = table.Column<string>(type: "text", nullable: false),
-                    Calories = table.Column<float>(type: "real", nullable: false),
-                    ImageUrl = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Difficulty = table.Column<int>(type: "integer", nullable: false),
+                    CaloriesPerServing = table.Column<float>(type: "real", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

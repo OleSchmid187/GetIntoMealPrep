@@ -14,13 +14,19 @@ export interface Ingredient {
     name: string;
   }
   
+  export enum Difficulty {
+    Easy = "Easy",
+    Medium = "Medium",
+    Hard = "Hard",
+  }
+  
   export interface Recipe {
     id: number;
     name: string;
     description?: string;
     instructions: string;
     portionCount: number;
-    difficulty: string;
+    difficulty: Difficulty;
     calories: number;
     imageUrl?: string;
     ingredients?: {

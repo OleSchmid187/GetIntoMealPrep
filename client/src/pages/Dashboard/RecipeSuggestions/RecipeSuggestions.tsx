@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchAllRecipes } from "../../../api/recipeApi";
 import { Recipe } from "../../../types/recipe";
+import RecipeCard from "./RecipeCard/RecipeCard";
+import RecipeModal from "./RecipeModal/RecipeModal";
 import "./RecipeSuggestions.css";
 
 function RecipeSuggestions() {
@@ -15,35 +17,17 @@ function RecipeSuggestions() {
 
   return (
     <div className="recipe-suggestions">
-      <h3>Probier doch mal folgende Rezepte:</h3>
+      <h3>Probier doch mal folgende Rezeptee:</h3>
       <div className="recipe-grid">
-        {recipes.map((r) => (
-          <div
-            className="recipe-card"
-            key={r.id}
-            onClick={() => setSelectedRecipe(r)}
-          >
-            <img src={r.imageUrl} alt={r.name} />
-            <p>{r.name}</p>
-          </div>
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.id} recipe={recipe} onSelect={() => setSelectedRecipe(recipe)} />
         ))}
       </div>
 
       <button className="more-btn">Mehr Rezepte entdecken</button>
 
       {selectedRecipe && (
-        <div className="recipe-modal" onClick={() => setSelectedRecipe(null)}>
-          <div className="recipe-modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedRecipe.name}</h2>
-            <img src={selectedRecipe.imageUrl} alt={selectedRecipe.name} />
-            <p><strong>Portionen:</strong> {selectedRecipe.portionCount}</p>
-            <p><strong>Kalorien:</strong> {selectedRecipe.calories} kcal</p>
-            <p><strong>Schwierigkeit:</strong> {selectedRecipe.difficulty}</p>
-            <p><strong>Zubereitung:</strong></p>
-            <p>{selectedRecipe.instructions}</p>
-            <button onClick={() => setSelectedRecipe(null)}>Schließen</button>
-          </div>
-        </div>
+        <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
       )}
     </div>
   );
