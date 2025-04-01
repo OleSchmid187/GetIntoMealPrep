@@ -8,6 +8,4 @@ public class Category
 
     [Required]
     public string Name { get; set; }
-
-    public ICollection<RecipeCategory> Recipes { get; set; } = new List<RecipeCategory>();
 }

@@ -11,12 +11,10 @@ public class Ingredient
 
     public decimal Price { get; set; }
 
-    public float CaloriesPer100g { get; set; }
+    public int CaloriesPer100g { get; set; }
     public float Protein { get; set; }
     public float Fat { get; set; }
     public float Carbs { get; set; }
 
     public string? ImageUrl { get; set; }
-
-    public string? SourceApiId { get; set; }
 }

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using GetIntoMealPrepAPI.Enums; 
 
 namespace GetIntoMealPrepAPI.Models;
 
@@ -16,13 +17,12 @@ public class Recipe
 
     public int PortionCount { get; set; }
 
-    public string Difficulty { get; set; } // "Leicht", "Mittel", "Schwer"
+    [Required]
+    public RecipeDifficulty Difficulty { get; set; }
 
-    public float Calories { get; set; }
+    public float CaloriesPerServing { get; set; }
 
     public string? ImageUrl { get; set; }
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     [JsonIgnore]
     public ICollection<RecipeIngredient> Ingredients { get; set; } = new List<RecipeIngredient>();

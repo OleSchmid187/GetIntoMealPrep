@@ -26,7 +26,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<RecipeIngredient>()
             .HasOne(ri => ri.Ingredient)
-            .WithMany() // <- wichtig, weil Ingredient keine Navigationsproperty zurück zu RecipeIngredient hat
+            .WithMany()
             .HasForeignKey(ri => ri.IngredientId);
 
         // Composite key for RecipeCategory
@@ -40,7 +40,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<RecipeCategory>()
             .HasOne(rc => rc.Category)
-            .WithMany(c => c.Recipes)
+            .WithMany()
             .HasForeignKey(rc => rc.CategoryId);
     }
 }
