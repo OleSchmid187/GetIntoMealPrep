@@ -1,0 +1,76 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using GetIntoMealPrepAPI.Data;
+using GetIntoMealPrepAPI.Models;
+
+namespace GetIntoMealPrepAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class RecipeController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public RecipeController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Recipe>>> GetAll()
+    {
+        var recipes = await _context.Recipes
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .Include(r => r.Categories)
+                .ThenInclude(rc => rc.Category)
+            .ToListAsync();
+
+        return Ok(recipes);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Recipe>> Get(int id)
+    {
+        var recipe = await _context.Recipes
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .Include(r => r.Categories)
+                .ThenInclude(rc => rc.Category)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
+        if (recipe == null) return NotFound();
+        return Ok(recipe);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Recipe>> Create(Recipe recipe)
+    {
+        _context.Recipes.Add(recipe);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(Get), new { id = recipe.Id }, recipe);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, Recipe updated)
+    {
+        if (id != updated.Id) return BadRequest();
+
+        _context.Entry(updated).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var recipe = await _context.Recipes.FindAsync(id);
+        if (recipe == null) return NotFound();
+
+        _context.Recipes.Remove(recipe);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+}
