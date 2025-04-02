@@ -12,7 +12,10 @@ function RecipeSuggestions() {
 
   useEffect(() => {
     fetchAllRecipes()
-      .then(setRecipes)
+      .then((fetchedRecipes) => {
+        const shuffledRecipes = fetchedRecipes.sort(() => 0.5 - Math.random());
+        setRecipes(shuffledRecipes.slice(0, 6));
+      })
       .catch((err) => console.error("Fehler beim Laden der Rezepte:", err));
   }, []);
 
