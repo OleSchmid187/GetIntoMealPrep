@@ -1,0 +1,66 @@
+.recipe-details-main {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.recipe-title {
+  margin-bottom: 20px;
+}
+
+.recipe-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.recipe-image-wrapper {
+  flex: 1 1 40%;
+  cursor: pointer;
+}
+
+.recipe-img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.recipe-info-section {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.instructions {
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.ingredient-card {
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ingredient-img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  margin-top: 8px;
+}
+
+.recipe-dialog-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 8px;
+}

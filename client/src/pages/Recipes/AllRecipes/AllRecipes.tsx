@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Paginator } from "primereact/paginator";
-import { fetchPaginatedRecipes } from "../../api/recipeApi"; // Import the new API function
-import RecipeCard from "../Dashboard/RecipeSuggestions/RecipeCard/RecipeCard";
-import Header from "../../components/Header/Header";
+import { fetchPaginatedRecipes } from "../../../api/recipeApi"; // Import the new API function
+import RecipeCard from "../../Dashboard/RecipeSuggestions/RecipeCard/RecipeCard";
+import Header from "../../../components/Header/Header";
 import "./AllRecipes.css";
-import { Recipe } from "../../types/recipe";
+import { Recipe } from "../../../types/recipe";
 
 
 function AllRecipes() {

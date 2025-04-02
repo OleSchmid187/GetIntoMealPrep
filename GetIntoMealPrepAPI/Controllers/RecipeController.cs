@@ -126,4 +126,25 @@ public class RecipeController : ControllerBase
 
         return Ok(new { recipe.ImageUrl });
     }
+
+    [HttpGet("{id}/ingredients")]
+    public async Task<ActionResult> GetIngredients(int id)
+    {
+        var recipe = await _context.Recipes
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
+        if (recipe == null) return NotFound();
+
+        var ingredients = recipe.Ingredients.Select(ri => new
+        {
+            ri.Ingredient.Id,
+            ri.Ingredient.Name,
+            ri.Quantity,
+            ri.Unit
+        });
+
+        return Ok(ingredients);
+    }
 }

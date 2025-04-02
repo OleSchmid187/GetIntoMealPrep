@@ -27,3 +27,8 @@ export async function fetchRandomRecipes(count: number): Promise<Recipe[]> {
   const response = await axios.get<Recipe[]>(`/api/recipe/random?count=${count}`);
   return response.data;
 }
+
+export async function fetchRecipeIngredients(recipeId: number): Promise<{ id: number; name: string; quantity: number; unit: string }[]> {
+  const response = await axios.get(`/api/recipe/${recipeId}/ingredients`);
+  return response.data;
+}

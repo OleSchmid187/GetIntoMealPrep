@@ -3,8 +3,8 @@ import Home from "./pages/Home/Home";
 import './App.css'
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import AllRecipes from "./pages/Recipes/AllRecipes";
-import RecipeDetails from "./pages/Recipes/RecipeDetails";
+import AllRecipes from "./pages/Recipes/AllRecipes/AllRecipes";
+import RecipeDetails from "./pages/Recipes/RecipeDetails/RecipeDetails";
 
 function App() {
   return (
