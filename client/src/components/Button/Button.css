@@ -29,8 +29,11 @@
 }
 
 .ui-button--secondary {
-  background-color: #eee;
-  color: #333;
+  background-color: #0b5e87;
+  color: #ffffff;
+}
+.ui-button--secondary:hover {
+  background-color: #0d3c6a;
 }
 
 /* Hover */

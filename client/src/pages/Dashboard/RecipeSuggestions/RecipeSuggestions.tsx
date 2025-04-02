@@ -4,6 +4,7 @@ import { Recipe } from "../../../types/recipe";
 import RecipeCard from "./RecipeCard/RecipeCard";
 import RecipeModal from "./RecipeModal/RecipeModal";
 import "./RecipeSuggestions.css";
+import Button from "../../../components/Button/Button";
 
 function RecipeSuggestions() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -24,7 +25,9 @@ function RecipeSuggestions() {
         ))}
       </div>
 
-      <button className="more-btn">Mehr Rezepte entdecken</button>
+      <Button size="large" color="secondary" onClick={() => console.log("Mehr Rezepte entdecken")}>
+        Mehr Rezepte entdecken
+      </Button>
 
       {selectedRecipe && (
         <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
