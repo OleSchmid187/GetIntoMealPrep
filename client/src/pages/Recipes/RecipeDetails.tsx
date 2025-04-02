@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { fetchAllRecipes } from "../../api/recipeApi";
+import { fetchRecipeById } from "../../api/recipeApi"; // Update to use the new API function
 import { Recipe } from "../../types/recipe";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
@@ -14,12 +14,11 @@ function RecipeDetails() {
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
-    fetchAllRecipes()
-      .then((recipes) => {
-        const foundRecipe = recipes.find((r) => r.id === parseInt(id || "", 10));
-        setRecipe(foundRecipe || null);
-      })
-      .catch((err) => console.error("Fehler beim Laden des Rezepts:", err));
+    if (id) {
+      fetchRecipeById(parseInt(id, 10)) // Fetch only the specific recipe
+        .then((fetchedRecipe) => setRecipe(fetchedRecipe))
+        .catch((err) => console.error("Fehler beim Laden des Rezepts:", err));
+    }
   }, [id]);
 
   if (!recipe) {

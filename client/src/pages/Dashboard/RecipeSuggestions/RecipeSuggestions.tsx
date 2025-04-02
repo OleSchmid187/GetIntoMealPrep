@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllRecipes } from "../../../api/recipeApi";
+import { fetchRandomRecipes } from "../../../api/recipeApi";
 import { Recipe } from "../../../types/recipe";
 import RecipeCard from "./RecipeCard/RecipeCard";
 import "./RecipeSuggestions.css";
@@ -11,11 +11,8 @@ function RecipeSuggestions() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchAllRecipes()
-      .then((fetchedRecipes) => {
-        const shuffledRecipes = fetchedRecipes.sort(() => 0.5 - Math.random());
-        setRecipes(shuffledRecipes.slice(0, 6));
-      })
+    fetchRandomRecipes(6)
+      .then((fetchedRecipes) => setRecipes(fetchedRecipes))
       .catch((err) => console.error("Fehler beim Laden der Rezepte:", err));
   }, []);
 
@@ -27,7 +24,7 @@ function RecipeSuggestions() {
           <RecipeCard
             key={recipe.id}
             recipe={recipe}
-            onSelect={() => navigate(`/recipes/${recipe.id}`)} // Navigate to recipe details page
+            onSelect={() => navigate(`/recipes/${recipe.id}`)}
           />
         ))}
       </div>

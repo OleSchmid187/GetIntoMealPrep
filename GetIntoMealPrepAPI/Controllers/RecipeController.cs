@@ -17,16 +17,24 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Recipe>>> GetAll()
+    public async Task<ActionResult> GetAll([FromQuery] int start = 0, [FromQuery] int limit = 32)
     {
+        var totalRecipes = await _context.Recipes.CountAsync();
+
         var recipes = await _context.Recipes
             .Include(r => r.Ingredients)
                 .ThenInclude(ri => ri.Ingredient)
             .Include(r => r.Categories)
                 .ThenInclude(rc => rc.Category)
+            .Skip(start)
+            .Take(limit)
             .ToListAsync();
 
-        return Ok(recipes);
+        return Ok(new
+        {
+            data = recipes,
+            total = totalRecipes
+        });
     }
 
     [HttpGet("{id}")]
@@ -41,6 +49,31 @@ public class RecipeController : ControllerBase
 
         if (recipe == null) return NotFound();
         return Ok(recipe);
+    }
+
+    [HttpGet("count")]
+    public async Task<ActionResult<int>> GetRecipeCount()
+    {
+        var totalRecipes = await _context.Recipes.CountAsync();
+        return Ok(totalRecipes);
+    }
+
+    [HttpGet("random")]
+    public async Task<ActionResult> GetRandomRecipes([FromQuery] int count = 5)
+    {
+        var totalRecipes = await _context.Recipes.CountAsync();
+        if (count > totalRecipes) count = totalRecipes;
+
+        var randomRecipes = await _context.Recipes
+            .OrderBy(r => Guid.NewGuid())
+            .Take(count)
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .Include(r => r.Categories)
+                .ThenInclude(rc => rc.Category)
+            .ToListAsync();
+
+        return Ok(randomRecipes);
     }
 
     [HttpPost]
