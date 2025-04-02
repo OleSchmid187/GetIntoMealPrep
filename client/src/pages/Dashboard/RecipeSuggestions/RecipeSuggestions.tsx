@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { fetchAllRecipes } from "../../../api/recipeApi";
 import { Recipe } from "../../../types/recipe";
 import RecipeCard from "./RecipeCard/RecipeCard";
-import RecipeModal from "./RecipeModal/RecipeModal";
 import "./RecipeSuggestions.css";
 import Button from "../../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 function RecipeSuggestions() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAllRecipes()
@@ -24,17 +24,18 @@ function RecipeSuggestions() {
       <h3>Probier doch mal folgende Rezepte:</h3>
       <div className="recipe-grid">
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} onSelect={() => setSelectedRecipe(recipe)} />
+          <RecipeCard
+            key={recipe.id}
+            recipe={recipe}
+            onSelect={() => navigate(`/recipes/${recipe.id}`)} // Navigate to recipe details page
+          />
         ))}
       </div>
 
-      <Button size="large" color="secondary" onClick={() => console.log("Mehr Rezepte entdecken")}>
+      <Button size="large" color="secondary" onClick={() => navigate("/recipes")}>
         Mehr Rezepte entdecken
       </Button>
 
-      {selectedRecipe && (
-        <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
-      )}
     </div>
   );
 }
