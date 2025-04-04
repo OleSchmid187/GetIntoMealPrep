@@ -16,15 +16,14 @@
 
 .recipe-image-wrapper {
   flex: 1 1 40%;
-  cursor: pointer;
 }
 
 .recipe-img {
-  width: 100%;
+  width: 500px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   object-fit: cover;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
 }
 
 .recipe-info-section {
@@ -34,12 +33,31 @@
   gap: 16px;
 }
 
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-row div {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .instructions {
   white-space: pre-line;
   line-height: 1.6;
+  margin-top: 20px; /* Adjusted margin for better spacing */
 }
 
 .ingredients-grid {
+  margin-top: 40px; /* Increased margin for better spacing */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
@@ -58,9 +76,28 @@
   margin-top: 8px;
 }
 
-.recipe-dialog-img {
-  width: 100%;
-  max-width: 800px;
-  height: auto;
+.info-item {
+  padding: 1rem;
   border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-item p {
+  margin: 0;
+}
+
+.difficulty-easy {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.difficulty-medium {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.difficulty-hard {
+  background-color: #f8d7da;
+  color: #721c24;
 }
