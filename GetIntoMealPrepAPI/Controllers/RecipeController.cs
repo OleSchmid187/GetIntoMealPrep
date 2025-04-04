@@ -141,6 +141,12 @@ public class RecipeController : ControllerBase
         {
             ri.Ingredient.Id,
             ri.Ingredient.Name,
+            ri.Ingredient.Price,
+            ri.Ingredient.CaloriesPer100g,
+            ri.Ingredient.Protein,
+            ri.Ingredient.Fat,
+            ri.Ingredient.Carbs,
+            ri.Ingredient.ImageUrl,
             ri.Quantity,
             ri.Unit
         });

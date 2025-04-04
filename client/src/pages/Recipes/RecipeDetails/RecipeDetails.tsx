@@ -12,7 +12,7 @@ function RecipeDetails() {
   const { id } = useParams<{ id: string }>();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [ingredients, setIngredients] = useState<
-    { id: number; name: string; quantity: number; unit: string }[]
+    { id: number; name: string; quantity: number; unit: string; imageUrl?: string }[]
   >([]);
 
   useEffect(() => {
@@ -62,8 +62,8 @@ function RecipeDetails() {
               subTitle={`${ingredient.quantity} ${ingredient.unit}`}
             >
               <img
-                src="platzhalter.png" // 🔴 Platzhalter-Bild
-                alt="Zutat Platzhalter"
+                src={ingredient.imageUrl || "platzhalter.png"} // Use imageUrl or fallback to placeholder
+                alt={ingredient.name}
                 className="ingredient-img"
               />
             </Card>
