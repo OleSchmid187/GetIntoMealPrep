@@ -40,11 +40,8 @@ function RecipeDetails() {
             <div className="info-row">
               <div><strong>Portionen:</strong> {recipe.portionCount}</div>
               <div><strong>Kalorien:</strong> {recipe.caloriesPerServing} kcal</div>
-              <div>
-                <strong>Schwierigkeit:</strong> 
-                <span className={`difficulty-${recipe.difficulty.toLowerCase()}`}>
-                  {recipe.difficulty}
-                </span>
+              <div className={`difficulty-${recipe.difficulty.toLowerCase()}`}>
+                <strong>Schwierigkeit:</strong>&nbsp;{recipe.difficulty}
               </div>
             </div>
             <Divider />

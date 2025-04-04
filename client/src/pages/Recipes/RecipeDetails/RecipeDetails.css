@@ -10,12 +10,12 @@
 .recipe-layout {
   display: flex;
   flex-direction: row;
-  gap: 30px;
-  flex-wrap: wrap;
+  gap: 16px; /* Adjusted gap to 16px */
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .recipe-image-wrapper {
-  flex: 1 1 40%;
+  flex: 0 0 500px; /* Fixed width for the image */
 }
 
 .recipe-img {
@@ -27,7 +27,8 @@
 }
 
 .recipe-info-section {
-  flex: 1 1 55%;
+  flex: 1; /* Take up remaining space */
+  margin-left: 16px; /* Ensure 16px margin to the image */
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -46,7 +47,6 @@
   text-align: center;
   padding: 5px;
   border-radius: 8px;
-  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -87,17 +87,26 @@
   margin: 0;
 }
 
+.difficulty-easy,
+.difficulty-medium,
+.difficulty-hard {
+  padding: 10px; /* Ensure padding applies to the entire div */
+  border-radius: 8px;
+  color: #ffffff; /* Ensure text is readable */
+  text-align: center;
+  display: flex; /* Align content properly */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+}
+
 .difficulty-easy {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #00801e;
 }
 
 .difficulty-medium {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: #ff8800;
 }
 
 .difficulty-hard {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #dc3545;
 }
