@@ -9,9 +9,8 @@
 
 .recipe-layout {
   display: flex;
-  flex-direction: row;
-  gap: 16px; /* Adjusted gap to 16px */
-  flex-wrap: nowrap; /* Prevent wrapping */
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .recipe-image-wrapper {
@@ -31,6 +30,7 @@
   margin-left: 16px; /* Ensure 16px margin to the image */
   display: flex;
   flex-direction: column;
+  min-width: 500px;
   gap: 16px;
 }
 
