@@ -62,7 +62,7 @@ function RecipeDetails() {
               subTitle={`${ingredient.quantity} ${ingredient.unit}`}
             >
               <img
-                src={ingredient.imageUrl || "platzhalter.png"} // Use imageUrl or fallback to placeholder
+                src={ingredient.imageUrl || "platzhalter.png"}
                 alt={ingredient.name}
                 className="ingredient-img"
               />
