@@ -57,7 +57,7 @@ function Header() {
             className="header-start-button"
             onClick={async () => {
               console.log(isAuthenticated);
-              await signIn(logtoConfig.redirectUri); // Pass redirect URI
+              await signIn(logtoConfig.redirectUri);
             }}
           >
             Jetzt starten
