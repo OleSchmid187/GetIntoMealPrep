@@ -10,6 +10,7 @@ import Callback from "./components/Callback/Callback";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import logtoConfig from "./config/logtoConfig";
 import Profil from "./pages/Profil/Profil";
+import Header from "./components/Header/Header";
 
 const config: LogtoConfig = logtoConfig;
 
@@ -17,6 +18,7 @@ function App() {
   return (
     <LogtoProvider config={config}>
       <Router>
+      <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/callback" element={<Callback />} />

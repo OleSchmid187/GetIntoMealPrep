@@ -11,3 +11,16 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.profile-icon {
+  cursor: pointer;
+  font-size: 2rem;
+  margin-right: 1rem;
+  vertical-align: middle;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile-icon:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}

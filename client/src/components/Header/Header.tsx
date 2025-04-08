@@ -2,10 +2,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../../styles/variables.css";
 import Button from "../Button/Button";
 import "./Header.css";
+import { useLogto } from "@logto/react"; // Import Logto hook
+import logtoConfig from "../../config/logtoConfig"; // Import Logto configuration
+import { FaUserCircle } from "react-icons/fa"; // Import profile icon
 
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isAuthenticated, signIn } = useLogto(); // Use Logto hook
   const isHome = location.pathname === "/";
 
   return (
@@ -20,21 +24,48 @@ function Header() {
         GetIntoMealPrep
       </div>
 
-      {isHome && (
-        <Button
-          size="medium"
-          color="primary"
-          className="header-start-button"
-          onClick={() => {
-            navigate("/dashboard");
-          }}
-        >
-          Jetzt starten
-        </Button>
+      {isAuthenticated ? (
+        <div className="header-actions">
+          {!isHome && (
+            <FaUserCircle
+              className="profile-icon"
+              onClick={() => navigate("/profil")}
+            />
+          )}
+          {isHome && (
+            <>
+              <FaUserCircle
+                className="profile-icon"
+                onClick={() => navigate("/profil")}
+              />
+              <Button
+                size="medium"
+                color="primary"
+                className="header-dashboard-button"
+                onClick={() => navigate("/dashboard")}
+              >
+                Zum Dashboard
+              </Button>
+            </>
+          )}
+        </div>
+      ) : (
+        isHome && (
+          <Button
+            size="medium"
+            color="primary"
+            className="header-start-button"
+            onClick={async () => {
+              console.log(isAuthenticated);
+              await signIn(logtoConfig.redirectUri); // Pass redirect URI
+            }}
+          >
+            Jetzt starten
+          </Button>
+        )
       )}
     </header>
   );
 }
-
 
 export default Header;

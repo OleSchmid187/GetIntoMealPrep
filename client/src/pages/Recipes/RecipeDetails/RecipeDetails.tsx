@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchRecipeById, fetchRecipeIngredients } from "../../../api/recipeApi";
 import { Recipe } from "../../../types/recipe";
-import Header from "../../../components/Header/Header";
 import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import { Divider } from "primereact/divider";
@@ -26,7 +25,6 @@ function RecipeDetails() {
 
   return (
     <>
-      <Header />
       <div className="recipe-details-main">
 
         <h1 className="recipe-title">{recipe.name}</h1>
