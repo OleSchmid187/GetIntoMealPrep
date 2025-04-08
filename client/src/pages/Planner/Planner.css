@@ -1,0 +1,44 @@
+.planner-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.planner-page h1 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.planner-page p {
+  color: #555;
+  font-size: 1rem;
+}
+
+.planner-calendar {
+  margin: 20px 0;
+}
+
+.meal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.meal-table th,
+.meal-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.meal-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.meal-table input {
+  width: 90%;
+  padding: 5px;
+  font-size: 0.9rem;
+}

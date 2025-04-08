@@ -11,6 +11,8 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import logtoConfig from "./config/logtoConfig";
 import Profil from "./pages/Profil/Profil";
 import Header from "./components/Header/Header";
+import Planner from "./pages/Planner/Planner";
+import MyRecipes from "./pages/MyRecipes/MyRecipes";
 
 const config: LogtoConfig = logtoConfig;
 
@@ -47,6 +49,8 @@ function App() {
             }
           />
           <Route path="/profil" element={<Profil />} />
+          <Route path="/planner" element={<Planner />} />
+          <Route path="/my-recipes" element={<MyRecipes />} />
         </Routes>
         <Footer />
       </Router>
