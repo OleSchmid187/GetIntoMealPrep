@@ -197,4 +197,14 @@ public class RecipeController : BaseController
 
         return Ok(favorites);
     }
+
+    [HttpGet("{id}/is-liked")]
+    public async Task<ActionResult<bool>> IsRecipeLiked(int id)
+    {
+        var user = await GetOrCreateUserAsync();
+
+        var isLiked = user.FavoriteRecipes.Any(r => r.Id == id);
+
+        return Ok(isLiked);
+    }
 }
