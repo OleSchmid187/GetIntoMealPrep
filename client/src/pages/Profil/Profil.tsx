@@ -2,46 +2,24 @@ import { Avatar } from "primereact/avatar";
 import Button from "../../components/Button/Button";
 import logtoConfig from "../../config/logtoConfig";
 import { useLogto } from "@logto/react";
-import { useEffect, useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { useProfileData } from "../../utils/useProfileData";
 import "./Profil.css";
 
-interface ProfileData {
-  name: string;
-  email: string;
-  avatar: string;
-}
-
 function Profil() {
-  const { signOut, getIdTokenClaims, isAuthenticated } = useLogto();
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const { signOut } = useLogto();
+  const { profileData, loading, error } = useProfileData();
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     signOut(logtoConfig.logoutRedirectUri);
   };
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      if (isAuthenticated) {
-        const claims = await getIdTokenClaims();
-        console.log(claims);
-
-        const name = (claims?.name as string) ?? "Kein Name";
-        const email = (claims?.email as string) ?? "Keine E-Mail";
-        const avatar = (claims?.picture as string) ?? "https://via.placeholder.com/150";
-
-        setProfileData({
-          name,
-          email,
-          avatar
-        });
-      }
-    };
-
-    fetchProfile();
-  }, [getIdTokenClaims, isAuthenticated]);
-
-  if (!profileData) {
+  if (loading) {
     return <div>Lade Profil...</div>;
+  }
+
+  if (error || !profileData) {
+    return <div>Fehler beim Laden des Profils</div>;
   }
 
   return (
@@ -51,21 +29,19 @@ function Profil() {
           <div className="custom-panel-header">Mein Profil</div>
           <div className="profil-header">
             <Avatar
-              image={profileData.avatar}
+              icon={<FaUserCircle />}
               shape="circle"
               size="xlarge"
-              className="profil-avatar"
+              className="profil-avatar-icon"
             />
-            <h2 className="profil-name">{profileData.name}</h2>
+            <h2 className="profil-name">{profileData.username}</h2>
           </div>
           <div className="profil-data">
-            <p><strong>Email:</strong> {profileData.email}</p>
+            <p>
+              <strong>Erstellt am:</strong> {profileData.createdAt}
+            </p>
             <div className="profil-actions">
-              <Button
-                color="secondary"
-                size="medium"
-                onClick={handleLogout}
-              >
+              <Button color="primary" size="medium" onClick={handleLogout}>
                 Ausloggen
               </Button>
             </div>

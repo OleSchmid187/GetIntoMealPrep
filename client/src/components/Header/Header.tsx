@@ -5,6 +5,7 @@ import "./Header.css";
 import { useLogto } from "@logto/react"; // Import Logto hook
 import logtoConfig from "../../config/logtoConfig"; // Import Logto configuration
 import { FaUserCircle } from "react-icons/fa"; // Import profile icon
+import logo from "../../assets/getintomealpreplogo.png"; // Import the logo image
 
 function Header() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Header() {
         }}
         style={{ cursor: "pointer" }}
       >
-        GetIntoMealPrep
+        <img src={logo} alt="GetIntoMealPrep Logo" className="header-logo-image" />
       </div>
 
       {isAuthenticated ? (

@@ -42,11 +42,16 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
+  .profil-avatar-icon {
+    color: rgb(36, 152, 210);
+    font-size: 4rem;
+  }
+  
   .profil-name {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #222;
-    margin: 0;
+    color: #3d3d3d;
+    margin-top: 24px;
   }
   
   .profil-data {

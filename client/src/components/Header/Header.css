@@ -12,6 +12,11 @@
   font-weight: bold;
 }
 
+.header-logo-image {
+  height: 40px; /* Adjust height as needed */
+  width: auto;
+}
+
 .profile-icon {
   cursor: pointer;
   font-size: 2rem;

@@ -24,7 +24,7 @@ function CTASection() {
           }
         }}
       >
-        Jetzt starten
+        {isAuthenticated ? "Zum Dashboard" : "Jetzt starten"}
       </Button>
     </section>
   );
