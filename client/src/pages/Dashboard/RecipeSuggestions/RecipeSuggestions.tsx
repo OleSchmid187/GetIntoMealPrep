@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import RecipeCard from "./RecipeCard/RecipeCard";
+import RecipeCard from "../../../components/RecipeCard/RecipeCard.tsx";
 import Button from "../../../components/Button/Button";
 import "./RecipeSuggestions.css";
 import { useRecipeSuggestions } from "./useRecipeSuggestions.ts";

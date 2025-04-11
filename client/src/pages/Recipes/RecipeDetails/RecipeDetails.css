@@ -3,8 +3,19 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+.recipe-title-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 0; /* Add margin to the container */
+}
+
 .recipe-title {
-  margin-bottom: 20px;
+  margin: 0;
+  flex-grow: 0; /* Ensure the title does not stretch */
+}
+
+.recipe-title-container .like-button {
+  margin-left: 20px;
 }
 
 .recipe-layout {

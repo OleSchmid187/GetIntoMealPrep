@@ -1,0 +1,57 @@
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.recipe-card-image img {
+  width: 100%;
+  height: auto; /* Automatically adjust height */
+  object-fit: cover; /* Ensure the image fills the area without distortion */
+  aspect-ratio: 3 / 2; /* Enforce 3:2 aspect ratio */
+}
+
+.recipe-card-content {
+  display: flex;
+  justify-content: space-between; /* Ensure space between text and like button */
+  align-items: center; /* Align items vertically */
+  padding: 16px; /* Apply padding only to the content */
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-bottom: 2rem;
+  justify-content: start; /* Align items to the start to prevent excessive stretching */
+  padding: 48px;
+}
+
+.recipe-grid:has(.recipe-card:nth-child(2)) {
+  grid-template-columns: repeat(3, minmax(300px, 1fr)); /* Ensure space for 3 columns even with 2 items */
+}
+
+.recipe-grid:has(.recipe-card:nth-child(1)) {
+  grid-template-columns: repeat(3, minmax(300px, 1fr)); /* Ensure space for 3 columns even with 1 item */
+}
+
+.recipe-card-content p {
+  margin: 0;
+  font-size: 18px; /* Increased font size */
+  font-weight: bold;
+}
+
+.like-button {
+  cursor: pointer;
+}

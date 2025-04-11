@@ -1,0 +1,41 @@
+.like-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.like-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.like-button.liked {
+  color: #1d9fd6; /* Green for liked */
+}
+
+.like-button.not-liked {
+  color: #6c757d; /* Gray for not liked */
+}
+
+.like-button .icon {
+  transition: color 0.2s ease;
+}
+
+.like-button .spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

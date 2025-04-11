@@ -1,8 +1,9 @@
 // LikeButtonWithLogic.tsx
 import { useEffect, useState } from "react";
-import { Button } from "primereact/button";
+import { FaHeart, FaRegHeart, FaSpinner } from "react-icons/fa"; // Import React icons
 import { useLogto } from "@logto/react";
 import axios from "axios";
+import "./LikeButton.css"; // Import custom CSS
 
 interface LikeButtonProps {
   recipeId: number;
@@ -14,7 +15,6 @@ export function LikeButton({ recipeId }: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
-
 
   // 1. Token laden
   useEffect(() => {
@@ -76,23 +76,20 @@ export function LikeButton({ recipeId }: LikeButtonProps) {
 
   if (loading) {
     return (
-      <Button
-        icon="pi pi-spin pi-spinner"
-        className="p-button-rounded p-button-text"
-        disabled
-      />
+      <button className="like-button loading" disabled>
+        <FaSpinner className="icon spin" /> {/* Spinner icon */}
+      </button>
     );
   }
 
   return (
-    <Button
-      icon={isLiked ? "pi pi-heart-fill" : "pi pi-heart"}
-      className={`p-button-rounded p-button-text ${
-        isLiked ? "p-button-success" : "p-button-secondary"
-      }`}
+    <button
+      className={`like-button ${isLiked ? "liked" : "not-liked"}`}
       onClick={toggleLike}
       aria-label="Like"
       disabled={updating}
-    />
+    >
+      {isLiked ? <FaHeart className="icon liked-icon" /> : <FaRegHeart className="icon not-liked-icon" />}
+    </button>
   );
 }

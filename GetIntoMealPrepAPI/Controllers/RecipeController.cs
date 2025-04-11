@@ -182,20 +182,29 @@ public class RecipeController : BaseController
     }
 
     [HttpGet("favorites")]
-    public async Task<IActionResult> GetFavorites()
+    public async Task<IActionResult> GetFavorites([FromQuery] int start = 0, [FromQuery] int limit = 32)
     {
         var user = await GetOrCreateUserAsync();
 
-        var favorites = user.FavoriteRecipes.Select(r => new
-        {
-            r.Id,
-            r.Name,
-            r.ImageUrl,
-            r.CaloriesPerServing,
-            r.Difficulty
-        });
+        var totalFavorites = user.FavoriteRecipes.Count;
 
-        return Ok(favorites);
+        var favorites = user.FavoriteRecipes
+            .Skip(start)
+            .Take(limit)
+            .Select(r => new
+            {
+                r.Id,
+                r.Name,
+                r.ImageUrl,
+                r.CaloriesPerServing,
+                r.Difficulty
+            });
+
+        return Ok(new
+        {
+            data = favorites,
+            total = totalFavorites
+        });
     }
 
     [HttpGet("{id}/is-liked")]

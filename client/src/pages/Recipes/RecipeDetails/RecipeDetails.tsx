@@ -18,10 +18,10 @@ function RecipeDetails() {
 
   return (
     <div className="recipe-details-main">
-      <h1 className="recipe-title">
-        {recipe.name}
+      <div className="recipe-title-container">
+        <h1 className="recipe-title">{recipe.name}</h1>
         <LikeButton recipeId={recipeId} />
-      </h1>
+      </div>
 
       <div className="recipe-layout">
         <div className="recipe-image-wrapper">
