@@ -1,37 +1,32 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchRecipeById, fetchRecipeIngredients } from "../../../api/recipeApi";
-import { Recipe } from "../../../types/recipe";
 import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import { Divider } from "primereact/divider";
+import { useRecipeDetails } from "./useRecipeDetails";
 import "./RecipeDetails.css";
 
 function RecipeDetails() {
   const { id } = useParams<{ id: string }>();
-  const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [ingredients, setIngredients] = useState<
-    { id: number; name: string; quantity: number; unit: string; imageUrl?: string }[]
-  >([]);
+  const recipeId = parseInt(id || "0", 10);
+  const { recipe, ingredients, loading, error } = useRecipeDetails(recipeId);
 
-  useEffect(() => {
-    if (id) {
-      fetchRecipeById(parseInt(id, 10)).then(setRecipe).catch(console.error);
-      fetchRecipeIngredients(parseInt(id, 10)).then(setIngredients).catch(console.error);
-    }
-  }, [id]);
-
+  if (loading) return <div>Lade Rezeptdetails...</div>;
+  if (error) return <div>{error}</div>;
   if (!recipe) return <p>Rezept nicht gefunden.</p>;
 
   return (
     <>
       <div className="recipe-details-main">
-
         <h1 className="recipe-title">{recipe.name}</h1>
 
         <div className="recipe-layout">
           <div className="recipe-image-wrapper">
-            <Image src={recipe.imageUrl} alt={recipe.name} imageClassName="recipe-img" preview />
+            <Image
+              src={recipe.imageUrl}
+              alt={recipe.name}
+              imageClassName="recipe-img"
+              preview
+            />
           </div>
 
           <div className="recipe-info-section">

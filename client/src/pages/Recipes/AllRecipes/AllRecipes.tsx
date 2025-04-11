@@ -1,36 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Paginator } from "primereact/paginator";
-import { fetchPaginatedRecipes } from "../../../api/recipeApi"; // Import the new API function
 import RecipeCard from "../../Dashboard/RecipeSuggestions/RecipeCard/RecipeCard";
 import "./AllRecipes.css";
-import { Recipe } from "../../../types/recipe";
-
+import { useAllRecipes } from "./useAllRecipes";
 
 function AllRecipes() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
   const [first, setFirst] = useState(0);
-  const [totalRecords, setTotalRecords] = useState(0);
   const recipesPerPage = 18;
-
-  const fetchRecipes = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { data, total } = await fetchPaginatedRecipes(first, recipesPerPage);
-      setRecipes(data);
-      setTotalRecords(total);
-    } catch (err) {
-      setError(err as Error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchRecipes();
-  }, [first]);
+  const { recipes, loading, error, total } = useAllRecipes(first, recipesPerPage);
 
   const onPageChange = (e: { first: number }) => {
     setFirst(e.first);
@@ -41,7 +18,7 @@ function AllRecipes() {
       <div className="all-recipes">
         <h2>Alle Rezepte</h2>
         {loading && <p>Rezepte werden geladen...</p>}
-        {error && <p>Fehler beim Laden der Rezepte: {error.message}</p>}
+        {error && <p>Fehler beim Laden der Rezepte: {error}</p>}
         <div className="recipe-grid">
           {recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} onSelect={() => {}} />
@@ -50,7 +27,7 @@ function AllRecipes() {
         <Paginator
           first={first}
           rows={recipesPerPage}
-          totalRecords={totalRecords}
+          totalRecords={total}
           onPageChange={onPageChange}
         />
       </div>
