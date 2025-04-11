@@ -7,14 +7,9 @@ namespace GetIntoMealPrepAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RecipeController : ControllerBase
-{
-    private readonly AppDbContext _context;
-
-    public RecipeController(AppDbContext context)
-    {
-        _context = context;
-    }
+public class RecipeController : BaseController
+{  
+    public RecipeController(AppDbContext context) : base(context) { }
 
     [HttpGet]
     public async Task<ActionResult> GetAll([FromQuery] int start = 0, [FromQuery] int limit = 32)
@@ -152,5 +147,54 @@ public class RecipeController : ControllerBase
         });
 
         return Ok(ingredients);
+    }
+
+    [HttpPost("{id}/like")]
+    public async Task<IActionResult> LikeRecipe(int id)
+    {
+        var recipe = await _context.Recipes.FindAsync(id);
+        if (recipe == null) return NotFound("Rezept nicht gefunden.");
+
+        var user = await GetOrCreateUserAsync();
+
+        if (user.FavoriteRecipes.Any(r => r.Id == id))
+            return BadRequest("Rezept wurde bereits geliked.");
+
+        user.FavoriteRecipes.Add(recipe);
+        await _context.SaveChangesAsync();
+
+        return Ok("Rezept wurde geliked.");
+    }
+
+    [HttpPost("{id}/unlike")]
+    public async Task<IActionResult> UnlikeRecipe(int id)
+    {
+        var user = await GetOrCreateUserAsync();
+
+        var recipe = user.FavoriteRecipes.FirstOrDefault(r => r.Id == id);
+        if (recipe == null)
+            return NotFound("Rezept ist nicht in deinen Favoriten.");
+
+        user.FavoriteRecipes.Remove(recipe);
+        await _context.SaveChangesAsync();
+
+        return Ok("Rezept wurde entliket.");
+    }
+
+    [HttpGet("favorites")]
+    public async Task<IActionResult> GetFavorites()
+    {
+        var user = await GetOrCreateUserAsync();
+
+        var favorites = user.FavoriteRecipes.Select(r => new
+        {
+            r.Id,
+            r.Name,
+            r.ImageUrl,
+            r.CaloriesPerServing,
+            r.Difficulty
+        });
+
+        return Ok(favorites);
     }
 }

@@ -4,6 +4,7 @@ import { format } from "date-fns";
 
 export interface ProfileData {
   username: string | null;
+  email: string | null;
   createdAt: string | null;
 }
 
@@ -29,11 +30,12 @@ export function useProfileData(): {
         const userInfo = (await fetchUserInfo()) as UserInfoResponse;
 
         const username = userInfo.username ?? "Kein Name";
+        const email = userInfo.email ?? "Keine Email";
         const createdAt = userInfo.created_at
           ? format(new Date(userInfo.created_at as string), "dd.MM.yyyy HH:mm:ss")
           : "Unbekanntes Erstellungsdatum";
 
-        const data = { username, createdAt };
+        const data = { username, email, createdAt };
         cachedData = data;
         setProfileData(data);
       } catch (err) {

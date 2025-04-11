@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GetIntoMealPrepAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250402172938_InitialCreate")]
+    [Migration("20250411094838_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace GetIntoMealPrepAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -149,6 +149,41 @@ namespace GetIntoMealPrepAPI.Migrations
                     b.ToTable("RecipeIngredients");
                 });
 
+            modelBuilder.Entity("GetIntoMealPrepAPI.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Sub")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Sub")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("RecipeUser", b =>
+                {
+                    b.Property<int>("FavoriteRecipesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("FavoriteRecipesId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFavoriteRecipes", (string)null);
+                });
+
             modelBuilder.Entity("GetIntoMealPrepAPI.Models.RecipeCategory", b =>
                 {
                     b.HasOne("GetIntoMealPrepAPI.Models.Category", "Category")
@@ -185,6 +220,21 @@ namespace GetIntoMealPrepAPI.Migrations
                     b.Navigation("Ingredient");
 
                     b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("RecipeUser", b =>
+                {
+                    b.HasOne("GetIntoMealPrepAPI.Models.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("FavoriteRecipesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GetIntoMealPrepAPI.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GetIntoMealPrepAPI.Models.Recipe", b =>

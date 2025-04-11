@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<RecipeCategory> RecipeCategories { get; set; }
+    public DbSet<User> Users { get; set; } // ✅ User-Tabelle
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,5 +43,15 @@ public class AppDbContext : DbContext
             .HasOne(rc => rc.Category)
             .WithMany()
             .HasForeignKey(rc => rc.CategoryId);
+
+        // ✅ 1:N Beziehung User → Recipes
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Sub)
+            .IsUnique();
+
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.FavoriteRecipes)
+            .WithMany()
+            .UsingEntity(j => j.ToTable("UserFavoriteRecipes"));
     }
 }

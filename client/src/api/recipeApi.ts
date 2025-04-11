@@ -1,34 +1,73 @@
+import { useLogto } from "@logto/react";
 import axios from "axios";
 import { Recipe } from "../types/recipe";
 
-export async function fetchAllRecipes(): Promise<Recipe[]> {
-  const res = await fetch("/api/recipe");
-  console.log(res);
-  if (!res.ok) throw new Error("Fehler beim Laden der Rezepte");
-  return res.json();
-}
+const getClient = async () => {
+  const { getAccessToken } = useLogto();
+  const token = await getAccessToken();
 
-export const fetchRecipeById = async (id: number): Promise<Recipe> => {
-  const response = await axios.get<Recipe>(`/api/recipe/${id}`);
-  return response.data;
+  return axios.create({
+    baseURL: "/api",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
-export async function fetchPaginatedRecipes(
-  first: number,
+export const fetchAllRecipes = async (): Promise<Recipe[]> => {
+  const client = await getClient();
+  const res = await client.get("/recipe");
+  return res.data;
+};
+
+export const fetchRecipeById = async (id: number): Promise<Recipe> => {
+  const client = await getClient();
+  const res = await client.get(`/recipe/${id}`);
+  return res.data;
+};
+
+export const fetchPaginatedRecipes = async (
+  start: number,
   limit: number
-): Promise<{ data: Recipe[]; total: number }> {
-  const response = await axios.get<{ data: Recipe[]; total: number }>(
-    `/api/recipe?start=${first}&limit=${limit}`
-  );
-  return response.data;
-}
+): Promise<{ data: Recipe[]; total: number }> => {
+  const client = await getClient();
+  const res = await client.get(`/recipe?start=${start}&limit=${limit}`);
+  return res.data;
+};
 
-export async function fetchRandomRecipes(count: number): Promise<Recipe[]> {
-  const response = await axios.get<Recipe[]>(`/api/recipe/random?count=${count}`);
-  return response.data;
-}
+export const fetchRandomRecipes = async (count: number): Promise<Recipe[]> => {
+  const client = await getClient();
+  const res = await client.get(`/recipe/random?count=${count}`);
+  return res.data;
+};
 
-export async function fetchRecipeIngredients(recipeId: number): Promise<{ id: number; name: string; quantity: number; unit: string }[]> {
-  const response = await axios.get(`/api/recipe/${recipeId}/ingredients`);
-  return response.data;
-}
+export const fetchRecipeIngredients = async (
+  recipeId: number
+): Promise<
+  {
+    id: number;
+    name: string;
+    quantity: number;
+    unit: string;
+  }[]
+> => {
+  const client = await getClient();
+  const res = await client.get(`/recipe/${recipeId}/ingredients`);
+  return res.data;
+};
+
+export const likeRecipe = async (id: number): Promise<void> => {
+  const client = await getClient();
+  await client.post(`/recipe/${id}/like`);
+};
+
+export const unlikeRecipe = async (id: number): Promise<void> => {
+  const client = await getClient();
+  await client.post(`/recipe/${id}/unlike`);
+};
+
+export const fetchFavoriteRecipes = async (): Promise<Recipe[]> => {
+  const client = await getClient();
+  const res = await client.get(`/recipe/favorites`);
+  return res.data;
+};

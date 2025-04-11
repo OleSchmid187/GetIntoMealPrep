@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import { fetchRandomRecipes } from "../../../api/recipeApi";
-import { Recipe } from "../../../types/recipe";
-import RecipeCard from "./RecipeCard/RecipeCard";
-import "./RecipeSuggestions.css";
-import Button from "../../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import RecipeCard from "./RecipeCard/RecipeCard";
+import Button from "../../../components/Button/Button";
+import "./RecipeSuggestions.css";
+import { useRecipeSuggestions } from "./useRecipeSuggestions.ts";
 
 function RecipeSuggestions() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const navigate = useNavigate();
+  const { recipes, loading, error } = useRecipeSuggestions(6);
 
-  useEffect(() => {
-    fetchRandomRecipes(6)
-      .then((fetchedRecipes) => setRecipes(fetchedRecipes))
-      .catch((err) => console.error("Fehler beim Laden der Rezepte:", err));
-  }, []);
+  if (loading) return <div>Lade Rezepte...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="recipe-suggestions">
@@ -28,11 +23,13 @@ function RecipeSuggestions() {
           />
         ))}
       </div>
-
-      <Button size="large" color="secondary" onClick={() => navigate("/recipes")}>
+      <Button
+        size="large"
+        color="secondary"
+        onClick={() => navigate("/recipes")}
+      >
         Mehr Rezepte entdecken
       </Button>
-
     </div>
   );
 }

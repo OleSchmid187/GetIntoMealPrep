@@ -63,6 +63,19 @@ namespace GetIntoMealPrepAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Sub = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RecipeCategories",
                 columns: table => new
                 {
@@ -112,6 +125,30 @@ namespace GetIntoMealPrepAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserFavoriteRecipes",
+                columns: table => new
+                {
+                    FavoriteRecipesId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFavoriteRecipes", x => new { x.FavoriteRecipesId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_UserFavoriteRecipes_Recipes_FavoriteRecipesId",
+                        column: x => x.FavoriteRecipesId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserFavoriteRecipes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeCategories_CategoryId",
                 table: "RecipeCategories",
@@ -121,6 +158,17 @@ namespace GetIntoMealPrepAPI.Migrations
                 name: "IX_RecipeIngredients_IngredientId",
                 table: "RecipeIngredients",
                 column: "IngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFavoriteRecipes_UserId",
+                table: "UserFavoriteRecipes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Sub",
+                table: "Users",
+                column: "Sub",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -133,6 +181,9 @@ namespace GetIntoMealPrepAPI.Migrations
                 name: "RecipeIngredients");
 
             migrationBuilder.DropTable(
+                name: "UserFavoriteRecipes");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
@@ -140,6 +191,9 @@ namespace GetIntoMealPrepAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recipes");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

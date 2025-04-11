@@ -38,6 +38,9 @@ function Profil() {
           </div>
           <div className="profil-data">
             <p>
+              <strong>Email:</strong> {profileData.email}
+            </p>
+            <p>
               <strong>Erstellt am:</strong> {profileData.createdAt}
             </p>
             <div className="profil-actions">
