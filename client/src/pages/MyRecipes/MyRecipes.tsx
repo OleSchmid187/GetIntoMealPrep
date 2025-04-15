@@ -27,6 +27,9 @@ function MyRecipes() {
       {loading && <p>Rezepte werden geladen...</p>}
       {error && <p>Fehler beim Laden der Rezepte: {error}</p>}
       <div className="recipe-grid">
+        {recipes.length === 0 && !loading && !error && (
+          <p className="no-recipes-message">Noch keine Rezepte im Rezeptbuch.</p>
+        )}
         {recipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
