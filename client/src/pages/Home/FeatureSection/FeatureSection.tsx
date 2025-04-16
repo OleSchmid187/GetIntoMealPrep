@@ -1,6 +1,6 @@
-import feature1 from "../../../assets/feature1.png";
-import feature2 from "../../../assets/feature2.png";
-import feature3 from "../../../assets/feature3.png";
+import feature1 from "../../../assets/feature1.jpg";
+import feature2 from "../../../assets/feature2.jpg";
+import feature3 from "../../../assets/feature3.jpg";
 
 import "./FeatureSection.css";
 

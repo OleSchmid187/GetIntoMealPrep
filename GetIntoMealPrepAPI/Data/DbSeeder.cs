@@ -1408,7 +1408,7 @@ public static class DbSeeder
             PortionCount = 8,
             Difficulty = RecipeDifficulty.Medium,
             CaloriesPerServing = 377,
-            ImageUrl = "/resources/recipes/recipe_griechischer_schichtsalat.png",
+            ImageUrl = "/resources/recipes/recipe_griechischer_schichtsalat.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = groundBeef, Quantity = 400, Unit = "g" },
@@ -1446,7 +1446,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Medium,
             CaloriesPerServing = 772,
-            ImageUrl = "/resources/recipes/recipe_chili_con_carne.png",
+            ImageUrl = "/resources/recipes/recipe_chili_con_carne.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = groundBeef, Quantity = 800, Unit = "g" },
@@ -1483,7 +1483,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Medium,
             CaloriesPerServing = 420,
-            ImageUrl = "/resources/recipes/recipe_ratatouille.png",
+            ImageUrl = "/resources/recipes/recipe_ratatouille.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = eggplant, Quantity = 1, Unit = "Stück" },
@@ -1527,7 +1527,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Medium,
             CaloriesPerServing = 573,
-            ImageUrl = "/resources/recipes/recipe_reissalat_mexico.png",
+            ImageUrl = "/resources/recipes/recipe_reissalat_mexico.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = rice, Quantity = 2, Unit = "Tasse(n)" },
@@ -1572,7 +1572,7 @@ public static class DbSeeder
             PortionCount = 6,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 500,
-            ImageUrl = "/resources/recipes/recipe_china_nudeln.png",
+            ImageUrl = "/resources/recipes/recipe_china_nudeln.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = mieNoodles, Quantity = 500, Unit = "g" },
@@ -1601,7 +1601,7 @@ public static class DbSeeder
             PortionCount = 2,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 161,
-            ImageUrl = "/resources/recipes/recipe_african_stew.png",
+            ImageUrl = "/resources/recipes/recipe_african_stew.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = beefTomato, Quantity = 6, Unit = "Stück" },
@@ -1633,7 +1633,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 332,
-            ImageUrl = "/resources/recipes/recipe_bircher_muesli.png",
+            ImageUrl = "/resources/recipes/recipe_bircher_muesli.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = oats, Quantity = 150, Unit = "g" },
@@ -1666,7 +1666,7 @@ public static class DbSeeder
             PortionCount = 5,
             Difficulty = RecipeDifficulty.Medium,
             CaloriesPerServing = 566,
-            ImageUrl = "/resources/recipes/recipe_brokkoli_auflauf.png",
+            ImageUrl = "/resources/recipes/recipe_brokkoli_auflauf.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 //new RecipeIngredient { Ingredient = wholeGrainNoodles, Quantity = 300, Unit = "g" },
@@ -1695,7 +1695,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 454,
-            ImageUrl = "/resources/recipes/recipe_italienischer_nudelsalat.png",
+            ImageUrl = "/resources/recipes/recipe_italienischer_nudelsalat.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 //new RecipeIngredient { Ingredient = wholeGrainNoodles, Quantity = 300, Unit = "g" },
@@ -1739,7 +1739,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 553,
-            ImageUrl = "/resources/recipes/recipe_mexikanische_fajitas.png",
+            ImageUrl = "/resources/recipes/recipe_mexikanische_fajitas.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 //new RecipeIngredient { Ingredient = avocado, Quantity = 1, Unit = "Stück" },
@@ -1777,7 +1777,7 @@ public static class DbSeeder
             PortionCount = 4,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 457,
-            ImageUrl = "/resources/recipes/recipe_klassischer_reissalat.png",
+            ImageUrl = "/resources/recipes/recipe_klassischer_reissalat.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 new RecipeIngredient { Ingredient = longGrainRice, Quantity = 200, Unit = "g" },
@@ -1812,7 +1812,7 @@ public static class DbSeeder
             PortionCount = 12,
             Difficulty = RecipeDifficulty.Easy,
             CaloriesPerServing = 121,
-            ImageUrl = "/resources/recipes/recipe_mini_wraps_gemuese.png",
+            ImageUrl = "/resources/recipes/recipe_mini_wraps_gemuese.jpg",
             Ingredients = new List<RecipeIngredient>
             {
                 //new RecipeIngredient { Ingredient = romaineLettuce, Quantity = 1, Unit = "Stück" },

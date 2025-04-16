@@ -1,14 +1,13 @@
 import "./HeroSection.css";
-
-import food1 from "../../../assets/food1.png";
-import food2 from "../../../assets/food2.png";
-import food3 from "../../../assets/food3.png";
-import food4 from "../../../assets/food4.png";
-import food5 from "../../../assets/food5.png";
-import food6 from "../../../assets/food6.png";
-import food7 from "../../../assets/food7.png";
-import food8 from "../../../assets/food8.png";
-import food9 from "../../../assets/food9.png";
+import food1 from "../../../assets/recipe_african_stew.jpg";
+import food2 from "../../../assets/recipe_bircher_muesli.jpg";
+import food3 from "../../../assets/recipe_brokkoli_auflauf.jpg";
+import food4 from "../../../assets/recipe_chili_con_carne.jpg";
+import food5 from "../../../assets/recipe_china_nudeln.jpg";
+import food6 from "../../../assets/recipe_griechischer_schichtsalat.jpg";
+import food7 from "../../../assets/recipe_italienischer_nudelsalat.jpg";
+import food8 from "../../../assets/recipe_klassischer_reissalat.jpg";
+import food9 from "../../../assets/recipe_mexikanische_fajitas.jpg";
 
 function HeroSection() {
   const images = [food1, food2, food3, food4, food5, food6, food7, food8, food9];
@@ -25,9 +24,15 @@ function HeroSection() {
           ))}
         </div>
       </div>
-      <div className="home-text-block">
-        <h1>Finde Deine Balance</h1>
-        <p>mit ausgewogenen Gerichten zum Selbstkochen.</p>
+      <div className="home-text-block-wrapper">
+        <div className="home-text-block">
+          <h1>
+            <span>Finde</span> Deine Balance
+          </h1>
+          <p>
+            <span>mit ausgewogenen Gerichten</span> zum Selbstkochen.
+          </p>
+        </div>
       </div>
     </section>
   );
