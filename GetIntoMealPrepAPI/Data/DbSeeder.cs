@@ -1430,41 +1430,77 @@ public static class DbSeeder
 
         db.Recipes.Add(recipe1);
 
-        // Rezept 2: Vegetarische Gemüsepfanne
+        // Rezept 2: Chili con Carne
         var recipe2 = new Recipe
         {
-            Name = "Vegetarische Gemüsepfanne",
-            Description = "Eine bunte Gemüsepfanne mit frischen Zutaten.",
-            Instructions = "Gemüse klein schneiden. In einer Pfanne mit etwas Öl anbraten. Mit Salz und Pfeffer abschmecken.",
-            PortionCount = 2,
-            Difficulty = RecipeDifficulty.Easy,
-            CaloriesPerServing = 350,
-            ImageUrl = "/resources/recipes/recipe_gemuesepfanne.png",
+            Name = "Chili con Carne",
+            Description = "Ein würziges Chili mit Hackfleisch, Bohnen und Mais.",
+            Instructions = "1. Zwiebeln in Würfel schneiden und im Öl goldgelb anbraten.\n" +
+                           "2. Hackfleisch zufügen, gut anbraten und Farbe nehmen lassen und das Hackfleisch zerkleinern.\n" +
+                           "3. Paprika in Würfel schneiden und zum Hackfleisch geben.\n" +
+                           "4. Tomatenmark zufügen und etwas anrösten.\n" +
+                           "5. Tomaten, zerkleinerten Knoblauch sowie Gewürze (Zucker, Salz, Pfeffer, Paprika, Tabasco, Chili oder Cayenne) zugeben. (Allerdings lieber erst einmal etwas vorsichtiger würzen und gegebenenfalls nach der Kochzeit nachwürzen.)\n" +
+                           "6. Mit Brühe auffüllen und bei mittlerer Hitze 30 - 45 Minuten einkochen lassen, ist die Flüssigkeit verkocht, immer wieder Brühe angießen.\n" +
+                           "7. Kurz vor Ende der Garzeit Bohnen und Mais zufügen. Diese nur wenige Minuten mitgaren.\n" +
+                           "8. Abschmecken und gegebenenfalls nachwürzen.",
+            PortionCount = 4,
+            Difficulty = RecipeDifficulty.Medium,
+            CaloriesPerServing = 772,
+            ImageUrl = "/resources/recipes/recipe_chili_con_carne.png",
             Ingredients = new List<RecipeIngredient>
             {
-                new RecipeIngredient { Ingredient = broccoli, Quantity = 200, Unit = "g" },
-                new RecipeIngredient { Ingredient = bellPepper, Quantity = 150, Unit = "g" }
-            },
-            Categories = new List<RecipeCategory>
-            {
-                new RecipeCategory { Category = vegetarian }
+                new RecipeIngredient { Ingredient = groundBeef, Quantity = 800, Unit = "g" },
+                new RecipeIngredient { Ingredient = onion, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = garlic, Quantity = 3, Unit = "Zehe(n)" },
+                new RecipeIngredient { Ingredient = oil, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = bellPepper, Quantity = 1, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = tomatoPaste, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = beefTomato, Quantity = 800, Unit = "g" },
+                new RecipeIngredient { Ingredient = kidneyBeans, Quantity = 480, Unit = "g" },
+                new RecipeIngredient { Ingredient = sweetCorn, Quantity = 200, Unit = "g" },
+                new RecipeIngredient { Ingredient = broth, Quantity = 500, Unit = "ml" },
+                new RecipeIngredient { Ingredient = cayennePepper, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = paprikaPowder, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = chiliPowder, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = sugar, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = tabasco, Quantity = 1, Unit = "Spritzer" } // Approximation
             }
         };
 
-        // Rezept 3: Tofu-Curry
+        // Rezept 3: Ratatouille
         var recipe3 = new Recipe
         {
-            Name = "Tofu-Curry",
-            Description = "Ein würziges Curry mit Tofu und Gemüse.",
-            Instructions = "Tofu würfeln und anbraten. Gemüse schneiden und in einer Pfanne mit Curry-Paste anbraten. Kokosmilch hinzufügen und köcheln lassen.",
-            PortionCount = 3,
+            Name = "Ratatouille",
+            Description = "Ein klassisches französisches Gemüsegericht.",
+            Instructions = "1. Gemüse in mundgerechte Stücke schneiden. (Gemüsezwiebel grob würfeln, Knoblauch und Kräuter fein hacken.)\n" +
+                           "2. Auberginenstücke einsalzen und mindestens 10 Minuten ziehen lassen und dann gründlich abtupfen.\n" +
+                           "3. In einer großen Pfanne mit hohem Rand das Olivenöl erhitzen. Zwiebeln und Zucchini darin anbraten, Paprika zugeben und als Letztes die Aubergine zufügen.\n" +
+                           "4. 5 Minuten kräftig braten.\n" +
+                           "5. Tomatenmark zugeben und unterrühren, salzen und pfeffern. Knoblauch und Kräuter sowie geschälte Tomaten und Zucker dazugeben.\n" +
+                           "6. Herd auf mittlere Flamme stellen und das Ratatouille etwa 20 Minuten köcheln lassen. (Wenn nötig, etwas Wasser zufügen. Das Gemüse sollte noch etwas Biss haben.)",
+            PortionCount = 4,
             Difficulty = RecipeDifficulty.Medium,
-            CaloriesPerServing = 520,
-            ImageUrl = "/resources/recipes/recipe_tofu_curry.png",
+            CaloriesPerServing = 420,
+            ImageUrl = "/resources/recipes/recipe_ratatouille.png",
             Ingredients = new List<RecipeIngredient>
             {
-                new RecipeIngredient { Ingredient = tofu, Quantity = 300, Unit = "g" },
-                new RecipeIngredient { Ingredient = bellPepper, Quantity = 200, Unit = "g" }
+                new RecipeIngredient { Ingredient = eggplant, Quantity = 1, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = zucchini, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = bellPepper, Quantity = 2, Unit = "Stück" }, // Red
+                new RecipeIngredient { Ingredient = beefTomato, Quantity = 1, Unit = "Dose" }, // Approximation for "gr. Dose"
+                new RecipeIngredient { Ingredient = onion, Quantity = 1, Unit = "Stück" }, // Large onion
+                new RecipeIngredient { Ingredient = garlic, Quantity = 4, Unit = "Zehe(n)" },
+                new RecipeIngredient { Ingredient = rosemary, Quantity = 1, Unit = "TL" },
+                new RecipeIngredient { Ingredient = thyme, Quantity = 1, Unit = "EL" },
+                new RecipeIngredient { Ingredient = sage, Quantity = 1, Unit = "EL" },
+                new RecipeIngredient { Ingredient = lavenderBlossoms, Quantity = 0.5f, Unit = "TL" },
+                new RecipeIngredient { Ingredient = sugar, Quantity = 1, Unit = "TL" },
+                new RecipeIngredient { Ingredient = oliveOil, Quantity = 100, Unit = "ml" },
+                new RecipeIngredient { Ingredient = seaSalt, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = tomatoPaste, Quantity = 0.5f, Unit = "Tube" }
             },
             Categories = new List<RecipeCategory>
             {
@@ -1473,6 +1509,330 @@ public static class DbSeeder
         };
 
         db.Recipes.AddRange(recipe2, recipe3);
+
+        // Rezept 4: Reissalat Mexico
+        var recipe4 = new Recipe
+        {
+            Name = "Reissalat Mexico",
+            Description = "Ein würziger Reissalat mit mexikanischen Zutaten.",
+            Instructions = "1. Reis in der Gemüsebrühe kochen und abkühlen lassen.\n" +
+                           "2. Erbsen ca. 3 Minuten in Wasser kochen, abschrecken und auskühlen lassen.\n" +
+                           "3. Paprikaschoten und Lauchzwiebeln klein schneiden.\n" +
+                           "4. Gemüse mit Reis mischen, Mais und Kidneybohnen unterheben.\n" +
+                           "5. Für das Dressing Essig, Öl, Sahne und Tomatenmark miteinander verrühren. Mit Salz, Zucker, Cayennepfeffer, Paprikapulver und den Kräutern abschmecken.\n" +
+                           "6. Unter Reis und das Gemüse mischen.\n" +
+                           "7. Mindestens 2 Stunden (besser länger) ziehen lassen.\n" +
+                           "8. Abschmecken.\n" +
+                           "9. Zerbröckelten Fetakäse über den Reissalat geben.",
+            PortionCount = 4,
+            Difficulty = RecipeDifficulty.Medium,
+            CaloriesPerServing = 573,
+            ImageUrl = "/resources/recipes/recipe_reissalat_mexico.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                new RecipeIngredient { Ingredient = rice, Quantity = 2, Unit = "Tasse(n)" },
+                new RecipeIngredient { Ingredient = vegetableBroth, Quantity = 4, Unit = "Tasse(n)" },
+                new RecipeIngredient { Ingredient = peas, Quantity = 100, Unit = "g" },
+                new RecipeIngredient { Ingredient = bellPepper, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = springOnion, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = sweetCorn, Quantity = 150, Unit = "g" },
+                new RecipeIngredient { Ingredient = kidneyBeans, Quantity = 1, Unit = "Dose" },
+                new RecipeIngredient { Ingredient = vinegar, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = rapeseedOil, Quantity = 3, Unit = "EL" },
+                new RecipeIngredient { Ingredient = cream, Quantity = 7, Unit = "EL" },
+                new RecipeIngredient { Ingredient = tomatoPaste, Quantity = 140, Unit = "g" },
+                new RecipeIngredient { Ingredient = fetaCheese, Quantity = 125, Unit = "g" },
+                new RecipeIngredient { Ingredient = seaSalt, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = sugar, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = cayennePepper, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = paprikaPowder, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = thyme, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = basil, Quantity = 1, Unit = "Prise" }, // Approximation
+                new RecipeIngredient { Ingredient = lavenderBlossoms, Quantity = 1, Unit = "Prise" } // Approximation
+            },
+            Categories = new List<RecipeCategory>
+            {
+                new RecipeCategory { Category = vegetarian }
+            }
+        };
+
+        db.Recipes.Add(recipe4);
+
+        // Rezept 5: China Nudeln
+        var recipe5 = new Recipe
+        {
+            Name = "China Nudeln mit Gemüse und Hähnchen",
+            Description = "Ein einfaches asiatisches Gericht mit Hähnchen, Gemüse und würzigen Mie-Nudeln.",
+            Instructions = "1. Hähnchenfleisch ca. 2 Stunden vor dem Kochen in dünne Streifen schneiden und in Sojasoße einlegen. Im Kühlschrank aufbewahren.\n" +
+                        "2. Chinakohl in Streifen, Frühlingszwiebeln in Ringe und Möhren in kleine Stifte schneiden.\n" +
+                        "3. Fleisch kurz anbraten und wieder herausnehmen.\n" +
+                        "4. Gemüse andünsten.\n" +
+                        "5. Mie-Nudeln nach Packungsanleitung zubereiten und abgießen.\n" +
+                        "6. Alles zusammengeben, mit Sojasoße, Chinagewürz, Salz und Pfeffer würzen. Die Nudeln sollen dunkel sein.",
+            PortionCount = 6,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 500,
+            ImageUrl = "/resources/recipes/recipe_china_nudeln.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                new RecipeIngredient { Ingredient = mieNoodles, Quantity = 500, Unit = "g" },
+                new RecipeIngredient { Ingredient = napaCabbage, Quantity = 1, Unit = "klein" },
+                new RecipeIngredient { Ingredient = springOnion, Quantity = 1, Unit = "Bund" },
+                new RecipeIngredient { Ingredient = carrots, Quantity = 1, Unit = "Bund" },
+                new RecipeIngredient { Ingredient = chickenBreast, Quantity = 600, Unit = "g" },
+                new RecipeIngredient { Ingredient = soySauce, Quantity = 100, Unit = "ml" }, // Approximation
+                new RecipeIngredient { Ingredient = chineseSpice, Quantity = 1, Unit = "TL" }, // Approximation
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" }
+            }
+        };
+        db.Recipes.Add(recipe5);
+
+        // Rezept 6: Afrikanisches Stew
+        var recipe6 = new Recipe
+        {
+            Name = "Afrikanisches Stew",
+            Description = "Ein würziges, veganes Eintopfgericht mit Tomaten, Bohnen und Erdnussbutter.",
+            Instructions = "1. Gewürfelte Zwiebeln in Öl glasig dünsten.\n" +
+                        "2. Tomaten grob würfeln und hinzufügen. 5-10 Minuten köcheln.\n" +
+                        "3. Kreuzkümmel, Erdnussbutter, Sambal Oelek, abgetropfte Bohnen, geschnittenen Knoblauch und Salz hinzugeben.\n" +
+                        "4. 3 Minuten bei geringer Hitze köcheln lassen.\n" +
+                        "5. Dazu passt Reis oder Couscous.",
+            PortionCount = 2,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 161,
+            ImageUrl = "/resources/recipes/recipe_african_stew.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                new RecipeIngredient { Ingredient = beefTomato, Quantity = 6, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = kidneyBeans, Quantity = 255, Unit = "g" },
+                new RecipeIngredient { Ingredient = onion, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = peanutButter, Quantity = 1, Unit = "EL" },
+                new RecipeIngredient { Ingredient = sambalOelek, Quantity = 2, Unit = "TL" },
+                new RecipeIngredient { Ingredient = cuminPowder, Quantity = 1, Unit = "TL" },
+                new RecipeIngredient { Ingredient = garlic, Quantity = 2, Unit = "Zehe(n)" },
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = rapeseedOil, Quantity = 1, Unit = "EL" }
+            },
+            Categories = new List<RecipeCategory>
+            {
+                new RecipeCategory { Category = vegan }
+            }
+        };
+        db.Recipes.Add(recipe6);
+
+        // Rezept 7: Bircher Müsli
+        var recipe7 = new Recipe
+        {
+            Name = "Bircher Müsli",
+            Description = "Ein klassisches Frühstück mit frischem Obst, Nüssen und Haferflocken.",
+            Instructions = "1. Haferflocken mit Milch und Joghurt in einer Schüssel gut verrühren.\n" +
+                        "2. Apfel und Birne waschen und raspeln, dann untermischen.\n" +
+                        "3. Zitronensaft, Rosinen und gehackte Nüsse hinzugeben. Optional mit Zimt oder Vanille verfeinern.\n" +
+                        "4. Über Nacht im Kühlschrank ziehen lassen.",
+            PortionCount = 4,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 332,
+            ImageUrl = "/resources/recipes/recipe_bircher_muesli.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                new RecipeIngredient { Ingredient = oats, Quantity = 150, Unit = "g" },
+                new RecipeIngredient { Ingredient = milk, Quantity = 300, Unit = "ml" },
+                new RecipeIngredient { Ingredient = plainYogurt, Quantity = 300, Unit = "g" },
+                //new RecipeIngredient { Ingredient = lemonJuice, Quantity = 1, Unit = "EL" },
+                //new RecipeIngredient { Ingredient = apple, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = pear, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = mixedNuts, Quantity = 2, Unit = "EL" },
+                //new RecipeIngredient { Ingredient = raisins, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = cinnamon, Quantity = 1, Unit = "Prise" } // optional
+            },
+            Categories = new List<RecipeCategory>
+            {
+                new RecipeCategory { Category = vegetarian }
+            }
+        };
+        db.Recipes.Add(recipe7);
+
+        // Rezept 8: Brokkoli-Auflauf mit Vollkornnudeln
+        var recipe8 = new Recipe
+        {
+            Name = "Brokkoli-Auflauf mit Vollkornnudeln",
+            Description = "Ein herzhafter Auflauf mit Brokkoli, Nudeln und Schinken.",
+            Instructions = "1. Brokkoli in Wasser kochen.\n" +
+                        "2. Nudeln in Salzwasser bissfest kochen.\n" +
+                        "3. Schinken würfeln, Sahne, Milch, Ei und Gewürze verrühren.\n" +
+                        "4. Alles vermengen, in Auflaufform geben. Tomaten klein schneiden und verteilen.\n" +
+                        "5. Mit Käse bestreuen und bei 200°C ca. 15 Minuten backen.",
+            PortionCount = 5,
+            Difficulty = RecipeDifficulty.Medium,
+            CaloriesPerServing = 566,
+            ImageUrl = "/resources/recipes/recipe_brokkoli_auflauf.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                //new RecipeIngredient { Ingredient = wholeGrainNoodles, Quantity = 300, Unit = "g" },
+                new RecipeIngredient { Ingredient = broccoli, Quantity = 500, Unit = "g" },
+                new RecipeIngredient { Ingredient = cookedHam, Quantity = 150, Unit = "g" },
+                new RecipeIngredient { Ingredient = cream, Quantity = 200, Unit = "ml" },
+                new RecipeIngredient { Ingredient = driedTomatoes, Quantity = 4, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = egg, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = gratedCheese, Quantity = 200, Unit = "g" },
+                new RecipeIngredient { Ingredient = nutmeg, Quantity = 1, Unit = "Prise" },
+                //new RecipeIngredient { Ingredient = driedHerbs, Quantity = 1, Unit = "TL" },
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" }
+            }
+        };
+        db.Recipes.Add(recipe8);
+
+        // Rezept 9: Italienischer Nudelsalat
+        var recipe9 = new Recipe
+        {
+            Name = "Italienischer Nudelsalat",
+            Description = "Ein frischer Nudelsalat mit mediterranen Zutaten wie Basilikum, Tomaten und Parmesan.",
+            Instructions = "1. Nudeln in Salzwasser kochen.\n" +
+                        "2. Paprika würfeln, Zwiebel fein hacken, Tomaten halbieren, Sellerie schneiden.\n" +
+                        "3. Mit Essig, Öl, Senf, Pesto und Balsamico-Creme vermengen.\n" +
+                        "4. Mit Parmesan, Pfeffer und Salz abschmecken.",
+            PortionCount = 4,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 454,
+            ImageUrl = "/resources/recipes/recipe_italienischer_nudelsalat.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                //new RecipeIngredient { Ingredient = wholeGrainNoodles, Quantity = 300, Unit = "g" },
+                new RecipeIngredient { Ingredient = bellPepper, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = redOnion, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = balsamicVinegarLight, Quantity = 3, Unit = "EL" },
+                //new RecipeIngredient { Ingredient = celeryStalk, Quantity = 2, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = cherryTomatoes, Quantity = 150, Unit = "g" },
+                new RecipeIngredient { Ingredient = garlic, Quantity = 1, Unit = "Zehe(n)" },
+                new RecipeIngredient { Ingredient = basil, Quantity = 1, Unit = "Pck." },
+                new RecipeIngredient { Ingredient = pineNuts, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = mustard, Quantity = 1, Unit = "EL" },
+                new RecipeIngredient { Ingredient = greenPesto, Quantity = 2, Unit = "TL" },
+                new RecipeIngredient { Ingredient = lightBalsamicCream, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = oliveOil, Quantity = 3, Unit = "EL" },
+                new RecipeIngredient { Ingredient = parmesan, Quantity = 50, Unit = "g" },
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = herbSalt, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" }
+            },
+            Categories = new List<RecipeCategory>
+            {
+                new RecipeCategory { Category = vegetarian }
+            }
+        };
+        db.Recipes.Add(recipe9);
+
+        // Rezept 10: Mexikanische Fajitas
+        var recipe10 = new Recipe
+        {
+            Name = "Mexikanische Fajitas",
+            Description = "Leckere Fajitas mit Hähnchen, Paprika, Guacamole und frischen Kräutern.",
+            Instructions = "1. Für Guacamole: Avocado schälen und zerdrücken.\n" +
+                        "2. Mit Salz, Pfeffer, Limettenabrieb und -saft mischen. Eine Knoblauchzehe hacken und zugeben. Schmand unterrühren, kaltstellen.\n" +
+                        "3. Zwiebel und Paprika in Streifen schneiden. Hähnchen ebenfalls in Streifen schneiden. Knoblauch hacken. Tomaten vierteln.\n" +
+                        "4. Öl in Pfanne erhitzen, Zwiebeln andünsten. Paprika zugeben, 5 Min. braten, würzen, beiseitestellen.\n" +
+                        "5. Hähnchen scharf anbraten, Gemüse mit Tomaten zugeben, mit Thymian, Cayenne, Knoblauch würzen.\n" +
+                        "6. Chili in Ringe schneiden, Koriander zupfen.\n" +
+                        "7. Tortillas erwärmen, mit Guacamole und Gemüse füllen.\n" +
+                        "8. Mit Chili und Koriander garnieren.",
+            PortionCount = 4,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 553,
+            ImageUrl = "/resources/recipes/recipe_mexikanische_fajitas.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                //new RecipeIngredient { Ingredient = avocado, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = lime, Quantity = 0.5, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = garlic, Quantity = 3, Unit = "Zehe(n)" },
+                new RecipeIngredient { Ingredient = sourCream, Quantity = 3, Unit = "EL" },
+                new RecipeIngredient { Ingredient = onion, Quantity = 1, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = bellPepper, Quantity = 3, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = chickenBreast, Quantity = 500, Unit = "g" },
+                new RecipeIngredient { Ingredient = cherryTomatoes, Quantity = 10, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = oliveOil, Quantity = 5, Unit = "EL" },
+                new RecipeIngredient { Ingredient = thyme, Quantity = 2, Unit = "Zweig(e)" },
+                //new RecipeIngredient { Ingredient = wheatTortillas, Quantity = 4, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = greenChili, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = coriander, Quantity = 0.5, Unit = "Bund" },
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = cayennePepper, Quantity = 1, Unit = "Prise" }
+            }
+        };
+        db.Recipes.Add(recipe10);
+
+        // Rezept 11: Klassischer Reissalat
+        var recipe11 = new Recipe
+        {
+            Name = "Klassischer Reissalat",
+            Description = "Ein frischer, leichter Reissalat mit Brokkoli, Mandarinen und würzigem Dressing.",
+            Instructions = "1. Reis nach Packungsanweisung in Salzwasser kochen.\n" +
+                        "2. Brokkoli in kochendem Wasser ca. 5 Minuten bissfest garen.\n" +
+                        "3. Mandarinen abtropfen lassen, Hälfte des Saftes auffangen. Mandarinen halbieren. Schinken würfeln.\n" +
+                        "4. Für das Dressing Joghurt und Mayonnaise glattrühren. Mandarinensaft, Öl und Essig unterrühren, mit Salz, Pfeffer und Curry würzen.\n" +
+                        "5. Reis abgießen, kurz abkühlen lassen.\n" +
+                        "6. Reis, Brokkoli, Mandarinen und Schinken mit dem Dressing mischen.\n" +
+                        "7. Mandelblättchen ohne Fett rösten und über den Salat streuen.",
+            PortionCount = 4,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 457,
+            ImageUrl = "/resources/recipes/recipe_klassischer_reissalat.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                new RecipeIngredient { Ingredient = longGrainRice, Quantity = 200, Unit = "g" },
+                new RecipeIngredient { Ingredient = broccoli, Quantity = 1, Unit = "Stück" },
+                //new RecipeIngredient { Ingredient = cannedMandarins, Quantity = 1, Unit = "Dose" },
+                new RecipeIngredient { Ingredient = cookedHam, Quantity = 150, Unit = "g" },
+                new RecipeIngredient { Ingredient = greekYogurt, Quantity = 80, Unit = "g" },
+                //new RecipeIngredient { Ingredient = mayonnaise, Quantity = 40, Unit = "g" },
+                //new RecipeIngredient { Ingredient = vegetableOil, Quantity = 1, Unit = "EL" },
+                new RecipeIngredient { Ingredient = whiteWineVinegar, Quantity = 2, Unit = "EL" },
+                new RecipeIngredient { Ingredient = almondFlakes, Quantity = 3, Unit = "EL" },
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = curryPowder, Quantity = 1, Unit = "Prise" }
+            }
+        };
+        db.Recipes.Add(recipe11);
+
+        // Rezept 12: Mini Wraps mit knackigem Gemüse
+        var recipe12 = new Recipe
+        {
+            Name = "Mini Wraps mit knackigem Gemüse",
+            Description = "Leichte vegetarische Wraps mit frischem Gemüse und cremigem Kräuterquark.",
+            Instructions = "1. Salatblätter abzupfen, waschen und trocken schütteln. Tomaten und Gurke würfeln. Mais abtropfen lassen.\n" +
+                        "2. Schnittlauch in feine Röllchen schneiden, Kresse vom Beet abschneiden.\n" +
+                        "3. Quark mit Milch glattrühren. Kräuter einrühren und mit Salz und Pfeffer würzen.\n" +
+                        "4. Wraps im Ofen kurz erwärmen.\n" +
+                        "5. Wraps mit Quark bestreichen, dabei einen Rand von ca. 1,5 cm frei lassen.\n" +
+                        "6. Mit Salat und Gemüse belegen und eng aufrollen.\n" +
+                        "7. Schräg in je 3 Stücke schneiden.\n" +
+                        "8. Wraps in Pergamentpapier einwickeln, Enden eindrehen.",
+            PortionCount = 12,
+            Difficulty = RecipeDifficulty.Easy,
+            CaloriesPerServing = 121,
+            ImageUrl = "/resources/recipes/recipe_mini_wraps_gemuese.png",
+            Ingredients = new List<RecipeIngredient>
+            {
+                //new RecipeIngredient { Ingredient = romaineLettuce, Quantity = 1, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = cherryTomatoes, Quantity = 100, Unit = "g" },
+                new RecipeIngredient { Ingredient = cucumber, Quantity = 100, Unit = "g" },
+                //new RecipeIngredient { Ingredient = cannedCorn, Quantity = 140, Unit = "g" },
+                //new RecipeIngredient { Ingredient = chives, Quantity = 0.25, Unit = "Bund" },
+                //new RecipeIngredient { Ingredient = cress, Quantity = 0.5, Unit = "Beet" },
+                new RecipeIngredient { Ingredient = lowFatQuark, Quantity = 350, Unit = "g" },
+                new RecipeIngredient { Ingredient = milk, Quantity = 2, Unit = "EL" },
+                //new RecipeIngredient { Ingredient = tortillaWraps, Quantity = 4, Unit = "Stück" },
+                new RecipeIngredient { Ingredient = salt, Quantity = 1, Unit = "Prise" },
+                new RecipeIngredient { Ingredient = pepper, Quantity = 1, Unit = "Prise" }
+            },
+            Categories = new List<RecipeCategory>
+            {
+                new RecipeCategory { Category = vegetarian }
+            }
+        };
+        db.Recipes.Add(recipe12);
 
         db.SaveChanges();
     }

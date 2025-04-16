@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function AllRecipes() {
   const [first, setFirst] = useState(0);
-  const recipesPerPage = 18;
+  const recipesPerPage = 9;
   const { recipes, loading, error, total } = useAllRecipes(first, recipesPerPage);
   const navigate = useNavigate();
 
@@ -22,6 +22,9 @@ function AllRecipes() {
         {loading && <p>Rezepte werden geladen...</p>}
         {error && <p>Fehler beim Laden der Rezepte: {error}</p>}
         <div className="recipe-grid">
+          {recipes.length === 0 && !loading && !error && (
+            <p className="no-recipes-message">Noch keine Rezepte verfügbar.</p>
+          )}
           {recipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}

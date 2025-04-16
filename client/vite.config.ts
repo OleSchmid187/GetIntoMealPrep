@@ -9,6 +9,7 @@ export default defineConfig({
     port: 5173,
     watch: {
       usePolling: true, // Enable polling for file changes
-    }
+    },
+    allowedHosts: ['getintomealprep.de'], // ✅ Add this line
   }
 })

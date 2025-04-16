@@ -7,3 +7,13 @@
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
+
+.no-recipes-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  color: #555;
+  text-align: center;
+}

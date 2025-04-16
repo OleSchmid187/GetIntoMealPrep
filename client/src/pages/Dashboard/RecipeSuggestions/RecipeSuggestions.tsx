@@ -6,7 +6,7 @@ import { useRecipeSuggestions } from "./useRecipeSuggestions.ts";
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
-  const { recipes, loading, error } = useRecipeSuggestions(6);
+  const { recipes, loading, error } = useRecipeSuggestions(3);
 
   if (loading) return <div>Lade Rezepte...</div>;
   if (error) return <div>{error}</div>;
