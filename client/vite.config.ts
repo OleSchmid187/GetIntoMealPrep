@@ -10,6 +10,6 @@ export default defineConfig({
     watch: {
       usePolling: true, // Enable polling for file changes
     },
-    allowedHosts: ['getintomealprep.de'], // ✅ Add this line
+    allowedHosts: ['getintomealprep.de', 'www.getintomealprep.de'],
   }
 })
