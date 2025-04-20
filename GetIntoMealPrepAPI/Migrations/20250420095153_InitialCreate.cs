@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -126,6 +127,37 @@ namespace GetIntoMealPrepAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MealPlanEntries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    RecipeId = table.Column<int>(type: "integer", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    MealType = table.Column<string>(type: "text", nullable: false),
+                    Position = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealPlanEntries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MealPlanEntries_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealPlanEntries_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserFavoriteRecipes",
                 columns: table => new
                 {
@@ -148,6 +180,17 @@ namespace GetIntoMealPrepAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealPlanEntries_RecipeId",
+                table: "MealPlanEntries",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealPlanEntries_UserId_Date_MealType_Position",
+                table: "MealPlanEntries",
+                columns: new[] { "UserId", "Date", "MealType", "Position" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeCategories_CategoryId",
@@ -174,6 +217,9 @@ namespace GetIntoMealPrepAPI.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "MealPlanEntries");
+
             migrationBuilder.DropTable(
                 name: "RecipeCategories");
 
