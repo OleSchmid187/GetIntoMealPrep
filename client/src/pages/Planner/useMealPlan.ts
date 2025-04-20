@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLogto } from '@logto/react';
+import { mealType } from '../../types/mealType';
 
 export interface MealPlanEntry {
   id: number;
   recipeId: number;
   date: string;
-  mealType: string;
+  mealType: mealType;
   position: number;
   recipe?: {
     id: number;
@@ -39,37 +40,38 @@ export function useMealPlan(weekOffset: number) {
       });
   }, [getIdToken]);
 
-  // Meal Plan laden
+  // Daten laden
   useEffect(() => {
     if (!token) return;
-
-    const fetchMealPlan = async () => {
-      try {
-        const res = await axios.get('/api/mealplan', {
-          params: { weekOffset },
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        setEntries(res.data);
-      } catch (err) {
-        console.error('Fehler beim Laden des Mealplans', err);
-        setError('Fehler beim Laden des Mealplans');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMealPlan();
+    fetchEntries();
   }, [token, weekOffset]);
 
-  // Gericht hinzufügen
+  // 🔁 Entries nachladen
+  const fetchEntries = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get('/api/mealplan', {
+        params: { weekOffset },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setEntries(res.data);
+    } catch (err) {
+      console.error('Fehler beim Laden des Mealplans', err);
+      setError('Fehler beim Laden des Mealplans');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Gericht hinzufügen → danach neu laden
   const addEntry = async (entry: Omit<MealPlanEntry, 'id'>) => {
     if (!token) return;
 
-    const res = await axios.post('/api/mealplan', entry, {
+    await axios.post('/api/mealplan', entry, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    setEntries((prev) => [...prev, res.data]);
+
+    await fetchEntries(); // ⬅️ aktualisiert den State mit vollständigen Rezepten
   };
 
   // Gericht verschieben

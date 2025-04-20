@@ -14,48 +14,53 @@ import Profil from "./pages/Profil/Profil";
 import Header from "./components/Header/Header";
 import Planner from "./pages/Planner/Planner";
 import MyRecipes from "./pages/MyRecipes/MyRecipes";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const config: LogtoConfig = logtoConfig;
 
+
 function App() {
   return (
-    <LogtoProvider config={config}>
-      <Router>
-      <Header/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/callback" element={<Callback />} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/recipes"
-            element={
-              <ProtectedRoute>
-                <AllRecipes />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/recipes/:id"
-            element={
-              <ProtectedRoute>
-                <RecipeDetails />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/profil" element={<Profil />} />
-          <Route path="/planner" element={<Planner />} />
-          <Route path="/my-recipes" element={<MyRecipes />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </LogtoProvider>
+    <DndProvider backend={HTML5Backend}>
+      <LogtoProvider config={config}>
+        <Router>
+        <Header/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/callback" element={<Callback />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/recipes"
+              element={
+                <ProtectedRoute>
+                  <AllRecipes />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/recipes/:id"
+              element={
+                <ProtectedRoute>
+                  <RecipeDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/profil" element={<Profil />} />
+            <Route path="/planner" element={<Planner />} />
+            <Route path="/my-recipes" element={<MyRecipes />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </LogtoProvider>
+    </DndProvider>
   );
 }
 

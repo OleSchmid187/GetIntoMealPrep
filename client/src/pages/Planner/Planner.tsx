@@ -5,12 +5,11 @@ import {
   MdLocalDining,
   MdDinnerDining,
   MdFastfood,
-  MdAdd,
 } from 'react-icons/md';
-import { useDrag, useDrop } from 'react-dnd';
 import WeekSwitcher from './WeekSwitcher/WeekSwitcher';
-import { useMealPlan, MealPlanEntry } from './useMealPlan'; // <– Typ importiert
-import RecipeImage from '../../components/RecipeImage/RecipeImage';
+import { useMealPlan, MealPlanEntry } from './useMealPlan';
+import { mealType } from '../../types/mealType';
+import PlannerCell from './PlannerCell/PlannerCell';
 
 const daysOfWeek = [
   { key: 'montag', label: 'Montag' },
@@ -30,33 +29,19 @@ const mealTimes = [
   { key: 'dinner', label: 'Abendessen', icon: <MdDinnerDining /> },
 ];
 
-const PlaceholderMeal = ({
-  name,
-  imageUrl,
-}: {
-  name: string;
-  imageUrl?: string;
-}) => {
-  return (
-    <div className="meal-item">
-      <div className="recipe-card-image">
-        {imageUrl ? <RecipeImage src={imageUrl} alt={name} /> : 'Kein Bild'}
-      </div>
-      <div className="meal-name">{name}</div>
-    </div>
-  );
-};
-
 function groupEntries(entries: MealPlanEntry[]): {
   [key: string]: MealPlanEntry[];
 } {
   const grouped: { [key: string]: MealPlanEntry[] } = {};
 
+  const indexToKey = [
+    'sonntag', 'montag', 'dienstag', 'mittwoch',
+    'donnerstag', 'freitag', 'samstag'
+  ];
+
   for (const entry of entries) {
     const date = new Date(entry.date);
-    const dayKey = date
-      .toLocaleDateString('de-DE', { weekday: 'long' })
-      .toLowerCase();
+    const dayKey = indexToKey[date.getDay()];
     const key = `${entry.mealType.toLowerCase()}-${dayKey}`;
 
     if (!grouped[key]) grouped[key] = [];
@@ -93,39 +78,10 @@ function Planner() {
 
     addEntry({
       recipeId: fakeRecipeId,
-      mealType: mealTime,
+      mealType: mealTime as mealType,
       position: plan[`${mealTime}-${dayKey}`]?.length || 0,
       date: date.toISOString().split('T')[0],
     });
-  };
-
-  const renderCell = (mealTime: string, day: string) => {
-    const key = `${mealTime}-${day}`;
-    const meals = plan[key] || [];
-
-    return (
-      <td
-        key={key}
-        className="planner-cell"
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={(e) => {
-          // Drag & Drop später
-        }}
-      >
-        {meals.map((entry, index) => (
-          <PlaceholderMeal
-            key={entry.id}
-            name={entry.recipe?.name || `Gericht ${index + 1}`}
-            imageUrl={entry.recipe?.imageUrl}
-          />
-        ))}
-        <div className="add-button-wrapper">
-          <button className="add-button" onClick={() => handleAddMeal(mealTime, day)}>
-            <MdAdd />
-          </button>
-        </div>
-      </td>
-    );
   };
 
   return (
@@ -159,7 +115,19 @@ function Planner() {
                       <span>{meal.label}</span>
                     </div>
                   </td>
-                  {daysOfWeek.map((day) => renderCell(meal.key, day.key))}
+                  {daysOfWeek.map((day) => (
+                    <PlannerCell
+                      key={`${meal.key}-${day.key}`}
+                      mealType={meal.key as mealType}
+                      day={day.key}
+                      weekOffset={weekOffset}
+                      meals={plan[`${meal.key}-${day.key}`] || []}
+                      onAdd={handleAddMeal}
+                      onMove={(id, mealType, date, position) =>
+                        updateEntry(id, { mealType, date, position })
+                      }
+                    />
+                  ))}
                 </tr>
               ))}
             </tbody>
