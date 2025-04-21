@@ -7,13 +7,15 @@ interface Props {
 }
 
 function RecipeImage({ src, alt, className }: Props) {
+  const fallbackSrc = getImageUrl("/fallback.png");
+
   return (
     <img
       src={getImageUrl(src)}
       alt={alt}
       className={className}
       onError={(e) => {
-        (e.currentTarget as HTMLImageElement).src = "/fallback.png";
+        (e.currentTarget as HTMLImageElement).src = fallbackSrc;
       }}
     />
   );
