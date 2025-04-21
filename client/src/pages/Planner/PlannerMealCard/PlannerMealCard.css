@@ -33,4 +33,22 @@
     font-weight: 500;
     color: #333;
   }
+
+  .planner-meal-card.highlight {
+    animation: fadeScaleIn 0.8s ease-out;
+  }
+  
+  @keyframes fadeScaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
   

@@ -57,6 +57,7 @@ function Planner() {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [selectedMealTime, setSelectedMealTime] = useState<mealType | null>(null);
   const [selectedDayKey, setSelectedDayKey] = useState<string | null>(null);
+  const [lastAddedId, setLastAddedId] = useState<number | null>(null);
 
   const {
     entries,
@@ -90,6 +91,11 @@ function Planner() {
       mealType: selectedMealTime,
       position: plan[`${selectedMealTime}-${selectedDayKey}`]?.length || 0,
       date: date.toISOString().split('T')[0],
+    }).then((newEntry) => {
+      if (newEntry) {
+        setLastAddedId(newEntry.id);
+        setTimeout(() => setLastAddedId(null), 1200);
+      }
     });
   
     setDialogVisible(false);
@@ -139,6 +145,7 @@ function Planner() {
                       onMove={(id, mealType, date, position) =>
                         updateEntry(id, { mealType, date, position })
                       }
+                      lastAddedId={lastAddedId}
                     />
                   ))}
                 </tr>

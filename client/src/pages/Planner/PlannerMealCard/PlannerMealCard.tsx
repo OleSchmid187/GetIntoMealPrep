@@ -8,9 +8,10 @@ interface PlannerMealCardProps {
   entry: MealPlanEntry;
   name: string;
   imageUrl?: string;
+  highlight?: boolean;
 }
 
-const PlannerMealCard = ({ entry, name, imageUrl }: PlannerMealCardProps) => {
+const PlannerMealCard = ({ entry, name, imageUrl, highlight }: PlannerMealCardProps) => {
   const [, dragRef] = useDrag({
     type: 'MEAL_ENTRY',
     item: { entry },
@@ -25,7 +26,10 @@ const PlannerMealCard = ({ entry, name, imageUrl }: PlannerMealCardProps) => {
   }, [dragRef]);
 
   return (
-    <div ref={dragElementRef} className="planner-meal-card">
+    <div
+      ref={dragElementRef}
+      className={`planner-meal-card${highlight ? ' highlight' : ''}`}
+    >
       <div className="planner-meal-image">
         {imageUrl ? <RecipeImage src={imageUrl} alt={name} /> : 'Kein Bild'}
       </div>

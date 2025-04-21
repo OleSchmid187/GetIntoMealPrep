@@ -1,9 +1,7 @@
 import { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 
-import {
-    MdAdd,
-  } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
 import { mealType } from '../../../types/mealType';
 import { MealPlanEntry } from '../useMealPlan';
 import PlannerMealCard from '../PlannerMealCard/PlannerMealCard';
@@ -16,9 +14,10 @@ interface PlannerCellProps {
   meals: MealPlanEntry[];
   onAdd: (mealType: string, day: string) => void;
   onMove: (id: number, mealType: mealType, date: string, position: number) => void;
+  lastAddedId?: number | null;
 }
 
-const PlannerCell = ({ mealType, day, weekOffset, meals, onAdd, onMove }: PlannerCellProps) => {
+const PlannerCell = ({ mealType, day, weekOffset, meals, onAdd, onMove, lastAddedId }: PlannerCellProps) => {
   const cellRef = useRef<HTMLTableDataCellElement | null>(null);
 
   const [, dropRef] = useDrop({
@@ -48,6 +47,7 @@ const PlannerCell = ({ mealType, day, weekOffset, meals, onAdd, onMove }: Planne
             entry={entry}
             name={entry.recipe?.name || `Gericht ${index + 1}`}
             imageUrl={entry.recipe?.imageUrl}
+            highlight={entry.id === lastAddedId}
           />
         ))}
       </div>

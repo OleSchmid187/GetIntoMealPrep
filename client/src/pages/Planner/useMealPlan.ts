@@ -65,15 +65,24 @@ export function useMealPlan(weekOffset: number) {
   };
 
   // Gericht hinzufügen
-  const addEntry = async (entry: Omit<MealPlanEntry, 'id'>) => {
-    if (!token) return;
-  
-    const res = await axios.post('/api/mealplan', entry, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  
-    // ⬅️ Direkt ins lokale State einfügen
-    setEntries((prev) => [...prev, res.data]);
+  const addEntry = async (entry: Omit<MealPlanEntry, 'id'>): Promise<MealPlanEntry | null> => {
+    if (!token) return null;
+
+    try {
+      const res = await axios.post('/api/mealplan', entry, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const newEntry = res.data;
+
+      // ⬅️ Direkt ins lokale State einfügen
+      setEntries((prev) => [...prev, newEntry]);
+
+      return newEntry;
+    } catch (error) {
+      console.error('Fehler beim Hinzufügen eines Eintrags:', error);
+      return null;
+    }
   };
 
   // Gericht verschieben
