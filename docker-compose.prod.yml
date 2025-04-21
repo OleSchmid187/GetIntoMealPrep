@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  api:
+    build: 
+      context: ./GetIntoMealPrepAPI
+      dockerfile: Dockerfile
+    container_name: getintomealprep_api
+    expose:
+      - "5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=db;Database=GetIntoMealPrepDb;Username=postgres;Password=tzutzu123
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    container_name: getintomealprep_frontend
+    expose:
+      - "80"
+    depends_on:
+      - api
+
+  db:
+    image: postgres:15
+    container_name: getintomealprep_db
+    environment:
+      POSTGRES_DB: GetIntoMealPrepDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tzutzu123
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:alpine
+    container_name: getintomealprep_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+      - frontend
+
+volumes:
+  pgdata:

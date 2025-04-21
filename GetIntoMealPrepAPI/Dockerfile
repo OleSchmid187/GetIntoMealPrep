@@ -1,5 +1,5 @@
 # SDK als Basis (auch für final!)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS base
 WORKDIR /app
 EXPOSE 5000
 
