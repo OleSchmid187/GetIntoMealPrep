@@ -107,12 +107,15 @@ export function useMealPlan(weekOffset: number) {
   // Gericht löschen
   const deleteEntry = async (id: number) => {
     if (!token) return;
-
+  
     await axios.delete(`/api/mealplan/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    setEntries((prev) => prev.filter((e) => e.id !== id));
+  
+    setEntries((prev) => {
+      const filtered = prev.filter((e) => e.id !== id);
+      return sortMealPlanEntries(filtered);
+    });
   };
 
   return {

@@ -36,14 +36,6 @@
   justify-content: center;
 }
 
-/* 🧩 Grid für compact mode */
-.recipe-grid--compact {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
-  justify-content: center;
-}
-
 .dialog-title {
   font-size: 1.4rem;
   font-weight: 600;

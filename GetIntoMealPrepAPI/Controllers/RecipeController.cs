@@ -53,7 +53,7 @@ public class RecipeController : BaseController
         var query = q?.ToLower() ?? "";
 
         var results = await _context.Recipes
-            .Where(r => r.Name.ToLower().Contains(query))
+            .Where(r => r.Name.ToLower().StartsWith(query))
             .OrderBy(r => r.Name)
             .Select(r => new {
                 r.Id,

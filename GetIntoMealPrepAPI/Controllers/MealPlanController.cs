@@ -136,10 +136,28 @@ public class MealPlanController : BaseController
     public async Task<IActionResult> DeleteEntry(int id)
     {
         var user = await GetOrCreateUserAsync();
-        var entry = await _context.MealPlanEntries.FirstOrDefaultAsync(e => e.Id == id && e.UserId == user.Id);
+
+        var entry = await _context.MealPlanEntries
+            .FirstOrDefaultAsync(e => e.Id == id && e.UserId == user.Id);
 
         if (entry == null)
             return NotFound("Eintrag nicht gefunden.");
+
+        // Alle Einträge mit derselben Zeit und nachfolgender Position
+        var sameSlotEntries = await _context.MealPlanEntries
+            .Where(e =>
+                e.UserId == user.Id &&
+                e.Date == entry.Date &&
+                e.MealType == entry.MealType &&
+                e.Position > entry.Position)
+            .ToListAsync();
+
+        // Positionen der nachfolgenden Einträge neu berechnen
+        foreach (var e in sameSlotEntries)
+        {
+            e.Position -= 1;
+            e.UpdatedAt = DateTime.UtcNow;
+        }
 
         _context.MealPlanEntries.Remove(entry);
         await _context.SaveChangesAsync();

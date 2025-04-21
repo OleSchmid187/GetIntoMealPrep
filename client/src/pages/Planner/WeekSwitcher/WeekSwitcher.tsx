@@ -12,7 +12,10 @@ const WeekSwitcher: React.FC<WeekSwitcherProps> = ({ weekOffset, setWeekOffset }
   const handlePrevious = () => setWeekOffset(weekOffset - 1);
   const handleNext = () => setWeekOffset(weekOffset + 1);
 
-  const weekText = weekOffset === 0 ? 'Woche aktuell' : `Woche +${weekOffset}`;
+  const weekText =
+  weekOffset === 0
+    ? 'Woche aktuell'
+    : `Woche ${weekOffset > 0 ? '+' : ''}${weekOffset}`;
   const { label: dateRange } = getWeekRange(weekOffset);
 
   return (
