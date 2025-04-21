@@ -1,0 +1,41 @@
+.week-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Statt space-between */
+  gap: 1rem; /* Abstand zwischen den 3 Elementen */
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.week-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.week-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.week-button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.week-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  fill: currentColor;
+  color: rgb(0, 145, 255);
+  opacity: 1;
+}

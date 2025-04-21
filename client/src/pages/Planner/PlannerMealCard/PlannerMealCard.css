@@ -1,0 +1,80 @@
+.planner-meal-card {
+    background: #ffffff;
+    border: 1px solid #e3e9f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.6rem;
+    padding: 0.5rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .planner-meal-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .planner-meal-image {
+    width: 90px;
+    aspect-ratio: 3 / 2;
+    background-color: #eef2f7;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  
+  .planner-meal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .planner-meal-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .planner-meal-card.highlight {
+    animation: fadeScaleIn 0.8s ease-out;
+  }
+  
+  @keyframes fadeScaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+/* Delete-Button: Startet als unsichtbar */
+.delete-meal-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: white;
+  border: 1px solid #e57373;
+  color: #e57373;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Sichtbar machen beim Hover */
+.planner-meal-card:hover .delete-meal-button {
+  opacity: 1;
+  pointer-events: auto;
+}

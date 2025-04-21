@@ -1,44 +1,51 @@
 .planner-page {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f9f9f9;
+  padding: 2rem;
+  position: relative;
 }
 
-.planner-page h1 {
-  color: #333;
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.planner-page p {
-  color: #555;
-  font-size: 1rem;
-}
-
-.planner-calendar {
-  margin: 20px 0;
-}
-
-.meal-table {
+.planner-table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0.5rem;
+  table-layout: fixed;
 }
 
-.meal-table th,
-.meal-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.planner-table th {
   text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
 }
 
-.meal-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
+.planner-day-label {
+  font-weight: 600;
+  padding: 0.5rem;
+  text-align: left;
+  white-space: nowrap;
 }
 
-.meal-table input {
-  width: 90%;
-  padding: 5px;
-  font-size: 0.9rem;
+.planner-meal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.meal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.meal-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 6px;
+  color: white;
+  font-size: 1rem;
 }

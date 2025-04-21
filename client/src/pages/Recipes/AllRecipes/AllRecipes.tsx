@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Paginator } from "primereact/paginator";
-import RecipeCard from "../../../components/RecipeCard/RecipeCard";
 import "./AllRecipes.css";
 import { useAllRecipes } from "./useAllRecipes";
 import { useNavigate } from "react-router-dom";
+import RecipeGrid from "../../../components/RecipeGrid/RecipeGrid";
 
 function AllRecipes() {
   const [first, setFirst] = useState(0);
@@ -21,18 +21,15 @@ function AllRecipes() {
         <h2>Alle Rezepte</h2>
         {loading && <p>Rezepte werden geladen...</p>}
         {error && <p>Fehler beim Laden der Rezepte: {error}</p>}
-        <div className="recipe-grid">
-          {recipes.length === 0 && !loading && !error && (
-            <p className="no-recipes-message">Noch keine Rezepte verfügbar.</p>
-          )}
-          {recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              onSelect={() => navigate(`/recipes/${recipe.id}`)}
-            />
-          ))}
-        </div>
+        {recipes.length === 0 && !loading && !error ? (
+          <p className="no-recipes-message">Noch keine Rezepte verfügbar.</p>
+        ) : (
+          <RecipeGrid
+            recipes={recipes}
+            onSelect={(recipe) => navigate(`/recipes/${recipe.id}`)}
+            columns={4}
+          />
+        )}
         <Paginator
           first={first}
           rows={recipesPerPage}

@@ -1,81 +1,170 @@
-import './Planner.css';
 import { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import './Planner.css';
+import {
+  MdFreeBreakfast,
+  MdLocalDining,
+  MdDinnerDining,
+  MdFastfood,
+} from 'react-icons/md';
+import WeekSwitcher from './WeekSwitcher/WeekSwitcher';
+import { useMealPlan, MealPlanEntry } from './useMealPlan';
+import { mealType } from '../../types/mealType';
+import PlannerCell from './PlannerCell/PlannerCell';
+import RecipeSelectDialog from './RecipeSelectDialog/RecipeSelectDialog';
 
-function Planner() {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [mealPlan, setMealPlan] = useState<MealPlan>({});
+const daysOfWeek = [
+  { key: 'montag', label: 'Montag' },
+  { key: 'dienstag', label: 'Dienstag' },
+  { key: 'mittwoch', label: 'Mittwoch' },
+  { key: 'donnerstag', label: 'Donnerstag' },
+  { key: 'freitag', label: 'Freitag' },
+  { key: 'samstag', label: 'Samstag' },
+  { key: 'sonntag', label: 'Sonntag' },
+];
 
-  interface MealPlan {
-    [day: string]: {
-      [time: string]: string;
-    };
+const mealTimes = [
+  { key: 'breakfast', label: 'Frühstück', icon: <MdFreeBreakfast />, color: '#FFB74D' },
+  { key: 'snack1', label: 'Snack 1', icon: <MdFastfood />, color: '#81C784' },
+  { key: 'lunch', label: 'Mittagessen', icon: <MdLocalDining />, color: '#64B5F6' },
+  { key: 'snack2', label: 'Snack 2', icon: <MdFastfood />, color: '#BA68C8' },
+  { key: 'dinner', label: 'Abendessen', icon: <MdDinnerDining />, color: '#E57373' },
+];
+
+function groupEntries(entries: MealPlanEntry[]): {
+  [key: string]: MealPlanEntry[];
+} {
+  const grouped: { [key: string]: MealPlanEntry[] } = {};
+
+  const indexToKey = [
+    'sonntag', 'montag', 'dienstag', 'mittwoch',
+    'donnerstag', 'freitag', 'samstag'
+  ];
+
+  for (const entry of entries) {
+    const date = new Date(entry.date);
+    const dayKey = indexToKey[date.getDay()];
+    const key = `${entry.mealType.toLowerCase()}-${dayKey}`;
+
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(entry);
   }
 
-  const handleMealChange = (day: string, time: string, meal: string): void => {
-    setMealPlan((prev: MealPlan) => ({
-      ...prev,
-      [day]: {
-        ...prev[day],
-        [time]: meal,
-      },
-    }));
+  return grouped;
+}
+
+function Planner() {
+  const [weekOffset, setWeekOffset] = useState(0);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [selectedMealTime, setSelectedMealTime] = useState<mealType | null>(null);
+  const [selectedDayKey, setSelectedDayKey] = useState<string | null>(null);
+  const [lastAddedId, setLastAddedId] = useState<number | null>(null);
+
+  const {
+    entries,
+    addEntry,
+    updateEntry,
+    deleteEntry,
+    loading,
+  } = useMealPlan(weekOffset);
+
+  const plan: { [key: string]: MealPlanEntry[] } = groupEntries(entries);
+
+  const handleAddMeal = (mealTime: string, dayKey: string) => {
+    setSelectedMealTime(mealTime as mealType);
+    setSelectedDayKey(dayKey);
+    setDialogVisible(true);
   };
 
-  const renderTable = () => {
-    const times = ['Breakfast', 'Lunch', 'Dinner'];
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-    return (
-      <table className="meal-table">
-        <thead>
-          <tr>
-            <th>Time</th>
-            {days.map((day) => (
-              <th key={day}>{day}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {times.map((time) => (
-            <tr key={time}>
-              <td>{time}</td>
-              {days.map((day) => (
-                <td key={day}>
-                  <input
-                    type="text"
-                    value={mealPlan[day]?.[time] || ''}
-                    onChange={(e) => handleMealChange(day, time, e.target.value)}
-                    placeholder="Add meal"
-                  />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  const handleRecipeSelect = (recipe: { id: number }) => {
+    if (!selectedMealTime || !selectedDayKey) return;
+  
+    const weekdayIndex = daysOfWeek.findIndex((d) => d.key === selectedDayKey);
+    const baseMonday = new Date();
+    baseMonday.setDate(
+      baseMonday.getDate() - ((baseMonday.getDay() + 6) % 7) + weekOffset * 7
     );
+    const date = new Date(baseMonday);
+    date.setDate(baseMonday.getDate() + weekdayIndex);
+  
+    addEntry({
+      recipeId: recipe.id,
+      mealType: selectedMealTime,
+      position: plan[`${selectedMealTime}-${selectedDayKey}`]?.length || 0,
+      date: date.toISOString().split('T')[0],
+    }).then((newEntry) => {
+      if (newEntry) {
+        setLastAddedId(newEntry.id);
+        setTimeout(() => setLastAddedId(null), 1200);
+      }
+    });
+  
+    setDialogVisible(false);
+    setSelectedMealTime(null);
+    setSelectedDayKey(null);
   };
 
   return (
     <div className="planner-page">
-      <h1>Wochenplaner</h1>
-      <p>Hier kannst du deine Mahlzeiten für die Woche planen.</p>
-      <Calendar
-        onChange={(date) => {
-          if (Array.isArray(date)) {
-            if (date[0] instanceof Date) {
-              setSelectedDate(date[0]); // Use the first date if it's an array
-            }
-          } else if (date instanceof Date) {
-            setSelectedDate(date); // Use the date directly if it's a single Date
-          }
-        }}
-        value={selectedDate}
-        className="planner-calendar"
-      />
-      <div className="meal-planner">{renderTable()}</div>
+      <div className="dashboard-panel">
+        <h3>Wochenplan</h3>
+        <WeekSwitcher weekOffset={weekOffset} setWeekOffset={setWeekOffset} />
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <table className="planner-table">
+            <thead>
+              <tr>
+                <th></th>
+                {daysOfWeek.map((day) => (
+                  <th key={day.key}>
+                    <div className="meal-header">
+                      <span>{day.label}</span>
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {mealTimes.map((meal) => (
+                <tr key={meal.key}>
+                  <td className="day-label">
+                    <div className="meal-header">
+                      <div
+                        className="meal-header-icon"
+                        style={{ backgroundColor: meal.color }}
+                      >
+                        {meal.icon}
+                      </div>
+                      <span>{meal.label}</span>
+                    </div>
+                  </td>
+                  {daysOfWeek.map((day) => (
+                    <PlannerCell
+                      key={`${meal.key}-${day.key}`}
+                      mealType={meal.key as mealType}
+                      day={day.key}
+                      weekOffset={weekOffset}
+                      meals={plan[`${meal.key}-${day.key}`] || []}
+                      onAdd={handleAddMeal}
+                      onMove={(id, mealType, date, position) =>
+                        updateEntry(id, { mealType, date, position })
+                      }
+                      onDelete={deleteEntry}
+                      lastAddedId={lastAddedId}
+                    />
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+        <RecipeSelectDialog
+          visible={dialogVisible}
+          onHide={() => setDialogVisible(false)}
+          onSelect={handleRecipeSelect}
+/>
     </div>
   );
 }

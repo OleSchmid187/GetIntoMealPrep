@@ -32,153 +32,37 @@ public class RecipeController : BaseController
         });
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Recipe>> Get(int id)
+    [HttpGet("sorted-by-name")]
+    public async Task<ActionResult> GetSortedByName()
     {
-        var recipe = await _context.Recipes
-            .Include(r => r.Ingredients)
-                .ThenInclude(ri => ri.Ingredient)
-            .Include(r => r.Categories)
-                .ThenInclude(rc => rc.Category)
-            .FirstOrDefaultAsync(r => r.Id == id);
-
-        if (recipe == null) return NotFound();
-        return Ok(recipe);
-    }
-
-    [HttpGet("count")]
-    public async Task<ActionResult<int>> GetRecipeCount()
-    {
-        var totalRecipes = await _context.Recipes.CountAsync();
-        return Ok(totalRecipes);
-    }
-
-    [HttpGet("random")]
-    public async Task<ActionResult> GetRandomRecipes([FromQuery] int count = 5)
-    {
-        var totalRecipes = await _context.Recipes.CountAsync();
-        if (count > totalRecipes) count = totalRecipes;
-
-        var randomRecipes = await _context.Recipes
-            .OrderBy(r => Guid.NewGuid())
-            .Take(count)
-            .Include(r => r.Ingredients)
-                .ThenInclude(ri => ri.Ingredient)
-            .Include(r => r.Categories)
-                .ThenInclude(rc => rc.Category)
+        var recipes = await _context.Recipes
+            .OrderBy(r => r.Name)
+            .Select(r => new {
+                r.Id,
+                r.Name,
+                r.ImageUrl
+            })
             .ToListAsync();
 
-        return Ok(randomRecipes);
+        return Ok(recipes);
     }
 
-    [HttpPost]
-    public async Task<ActionResult<Recipe>> Create(Recipe recipe)
+    [HttpGet("search")]
+    public async Task<ActionResult> Search([FromQuery] string q)
     {
-        _context.Recipes.Add(recipe);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(Get), new { id = recipe.Id }, recipe);
-    }
+        var query = q?.ToLower() ?? "";
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Recipe updated)
-    {
-        if (id != updated.Id) return BadRequest();
+        var results = await _context.Recipes
+            .Where(r => r.Name.ToLower().StartsWith(query))
+            .OrderBy(r => r.Name)
+            .Select(r => new {
+                r.Id,
+                r.Name,
+                r.ImageUrl
+            })
+            .ToListAsync();
 
-        _context.Entry(updated).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        var recipe = await _context.Recipes.FindAsync(id);
-        if (recipe == null) return NotFound();
-
-        _context.Recipes.Remove(recipe);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
-
-    [HttpPost("{id}/upload-image")]
-    public async Task<IActionResult> UploadImage(int id, IFormFile file)
-    {
-        var recipe = await _context.Recipes.FindAsync(id);
-        if (recipe == null) return NotFound();
-
-        var fileName = $"recipe_{recipe.Name.Replace(" ", "_").ToLower()}.png";
-        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "recipes");
-        Directory.CreateDirectory(folderPath);
-
-        var fullPath = Path.Combine(folderPath, fileName);
-        using var stream = new FileStream(fullPath, FileMode.Create);
-        await file.CopyToAsync(stream);
-
-        recipe.ImageUrl = $"/resources/recipes/{fileName}";
-        await _context.SaveChangesAsync();
-
-        return Ok(new { recipe.ImageUrl });
-    }
-
-    [HttpGet("{id}/ingredients")]
-    public async Task<ActionResult> GetIngredients(int id)
-    {
-        var recipe = await _context.Recipes
-            .Include(r => r.Ingredients)
-                .ThenInclude(ri => ri.Ingredient)
-            .FirstOrDefaultAsync(r => r.Id == id);
-
-        if (recipe == null) return NotFound();
-
-        var ingredients = recipe.Ingredients.Select(ri => new
-        {
-            ri.Ingredient.Id,
-            ri.Ingredient.Name,
-            ri.Ingredient.Price,
-            ri.Ingredient.CaloriesPer100g,
-            ri.Ingredient.Protein,
-            ri.Ingredient.Fat,
-            ri.Ingredient.Carbs,
-            ri.Ingredient.ImageUrl,
-            ri.Quantity,
-            ri.Unit
-        });
-
-        return Ok(ingredients);
-    }
-
-    [HttpPost("{id}/like")]
-    public async Task<IActionResult> LikeRecipe(int id)
-    {
-        var recipe = await _context.Recipes.FindAsync(id);
-        if (recipe == null) return NotFound("Rezept nicht gefunden.");
-
-        var user = await GetOrCreateUserAsync();
-
-        if (user.FavoriteRecipes.Any(r => r.Id == id))
-            return BadRequest("Rezept wurde bereits geliked.");
-
-        user.FavoriteRecipes.Add(recipe);
-        await _context.SaveChangesAsync();
-
-        return Ok("Rezept wurde geliked.");
-    }
-
-    [HttpPost("{id}/unlike")]
-    public async Task<IActionResult> UnlikeRecipe(int id)
-    {
-        var user = await GetOrCreateUserAsync();
-
-        var recipe = user.FavoriteRecipes.FirstOrDefault(r => r.Id == id);
-        if (recipe == null)
-            return NotFound("Rezept ist nicht in deinen Favoriten.");
-
-        user.FavoriteRecipes.Remove(recipe);
-        await _context.SaveChangesAsync();
-
-        return Ok("Rezept wurde entliket.");
+        return Ok(results);
     }
 
     [HttpGet("favorites")]
@@ -207,7 +91,105 @@ public class RecipeController : BaseController
         });
     }
 
-    [HttpGet("{id}/is-liked")]
+    [HttpGet("count")]
+    public async Task<ActionResult<int>> GetRecipeCount()
+    {
+        var totalRecipes = await _context.Recipes.CountAsync();
+        return Ok(totalRecipes);
+    }
+
+    [HttpGet("random")]
+    public async Task<ActionResult> GetRandomRecipes([FromQuery] int count = 5)
+    {
+        var totalRecipes = await _context.Recipes.CountAsync();
+        if (count > totalRecipes) count = totalRecipes;
+
+        var randomRecipes = await _context.Recipes
+            .OrderBy(r => Guid.NewGuid())
+            .Take(count)
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .Include(r => r.Categories)
+                .ThenInclude(rc => rc.Category)
+            .ToListAsync();
+
+        return Ok(randomRecipes);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Recipe>> Get(int id)
+    {
+        var recipe = await _context.Recipes
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .Include(r => r.Categories)
+                .ThenInclude(rc => rc.Category)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
+        if (recipe == null) return NotFound();
+        return Ok(recipe);
+    }
+
+    [HttpGet("{id:int}/ingredients")]
+    public async Task<ActionResult> GetIngredients(int id)
+    {
+        var recipe = await _context.Recipes
+            .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
+        if (recipe == null) return NotFound();
+
+        var ingredients = recipe.Ingredients.Select(ri => new
+        {
+            ri.Ingredient.Id,
+            ri.Ingredient.Name,
+            ri.Ingredient.Price,
+            ri.Ingredient.CaloriesPer100g,
+            ri.Ingredient.Protein,
+            ri.Ingredient.Fat,
+            ri.Ingredient.Carbs,
+            ri.Ingredient.ImageUrl,
+            ri.Quantity,
+            ri.Unit
+        });
+
+        return Ok(ingredients);
+    }
+
+    [HttpPost("{id:int}/like")]
+    public async Task<IActionResult> LikeRecipe(int id)
+    {
+        var recipe = await _context.Recipes.FindAsync(id);
+        if (recipe == null) return NotFound("Rezept nicht gefunden.");
+
+        var user = await GetOrCreateUserAsync();
+
+        if (user.FavoriteRecipes.Any(r => r.Id == id))
+            return BadRequest("Rezept wurde bereits geliked.");
+
+        user.FavoriteRecipes.Add(recipe);
+        await _context.SaveChangesAsync();
+
+        return Ok("Rezept wurde geliked.");
+    }
+
+    [HttpPost("{id:int}/unlike")]
+    public async Task<IActionResult> UnlikeRecipe(int id)
+    {
+        var user = await GetOrCreateUserAsync();
+
+        var recipe = user.FavoriteRecipes.FirstOrDefault(r => r.Id == id);
+        if (recipe == null)
+            return NotFound("Rezept ist nicht in deinen Favoriten.");
+
+        user.FavoriteRecipes.Remove(recipe);
+        await _context.SaveChangesAsync();
+
+        return Ok("Rezept wurde entliket.");
+    }
+
+    [HttpGet("{id:int}/is-liked")]
     public async Task<ActionResult<bool>> IsRecipeLiked(int id)
     {
         var user = await GetOrCreateUserAsync();

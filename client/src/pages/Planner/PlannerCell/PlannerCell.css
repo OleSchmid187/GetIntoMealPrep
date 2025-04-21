@@ -1,0 +1,53 @@
+.planner-cell {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  min-height: 140px;
+  min-width: 140px;
+  position: relative;
+  transition: background-color 0.2s ease;
+  vertical-align: top; /* Ensure cell aligns properly */
+}
+  
+  .planner-cell:hover {
+    background-color: #f0f8ff;
+  }
+  
+  .planner-cell .add-button-wrapper {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .planner-cell:hover .add-button-wrapper {
+    opacity: 1;
+  }
+  
+  .planner-cell .add-button {
+    background: white;
+    border: 2px solid #4a90e2;
+    color: #4a90e2;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .planner-cell .add-button:hover {
+    background: #4a90e2;
+    color: white;
+  }
+
+.planner-cell-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 100px; /* Ensure visible cell even when empty */
+}

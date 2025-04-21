@@ -1,10 +1,10 @@
 .my-recipes-page {
-  padding: 20px;
+  padding: 2.5rem;
 }
 
-.fancy-header {
+.my-recipes-header {
   font-size: 2.5rem;
-  color: #ff6347;
+  color: #000; /* Changed to black */
   text-align: center;
   margin-bottom: 20px;
   font-family: "Cursive", sans-serif;

@@ -6,16 +6,20 @@ import "./RecipeCard.css"; // Import CSS file
 interface Props {
   recipe: Recipe;
   onSelect: () => void;
+  compact?: boolean;
 }
 
-function RecipeCard({ recipe, onSelect }: Props) {
+function RecipeCard({ recipe, onSelect, compact = false }: Props) {
   const handleCardClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest(".like-button")) return; // Prevent onSelect if LikeButton is clicked
+    if ((e.target as HTMLElement).closest(".like-button")) return;
     onSelect();
   };
 
   return (
-    <div className="recipe-card" onClick={handleCardClick}>
+    <div
+      className={`recipe-card ${compact ? "recipe-card--compact" : ""}`}
+      onClick={handleCardClick}
+    >
       <div className="recipe-card-image">
         <RecipeImage src={recipe.imageUrl} alt={recipe.name} />
       </div>

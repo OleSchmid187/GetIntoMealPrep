@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import RecipeCard from "../../../components/RecipeCard/RecipeCard.tsx";
 import Button from "../../../components/Button/Button";
 import "./RecipeSuggestions.css";
 import { useRecipeSuggestions } from "./useRecipeSuggestions.ts";
+import RecipeGrid from "../../../components/RecipeGrid/RecipeGrid.tsx";
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
@@ -14,15 +14,11 @@ function RecipeSuggestions() {
   return (
     <div className="recipe-suggestions">
       <h3>Probier doch mal folgende Rezepte:</h3>
-      <div className="recipe-grid">
-        {recipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            recipe={recipe}
-            onSelect={() => navigate(`/recipes/${recipe.id}`)}
-          />
-        ))}
-      </div>
+      <RecipeGrid
+        recipes={recipes}
+        onSelect={(recipe) => navigate(`/recipes/${recipe.id}`)}
+        columns={3}
+      />
       <Button
         size="large"
         color="secondary"

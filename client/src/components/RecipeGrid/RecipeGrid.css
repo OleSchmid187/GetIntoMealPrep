@@ -1,0 +1,52 @@
+.recipe-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 24px;
+  justify-content: center;
+}
+
+.recipe-grid.compact {
+  max-width: 100%;
+  justify-content: center;
+}
+
+/* Dynamische Grid-Columns (1–6 z. B.) */
+.columns-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+.columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.columns-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.columns-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+.columns-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Responsiveness (alle Columns) */
+@media (max-width: 1000px) {
+  .columns-4,
+  .columns-5,
+  .columns-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .columns-1,
+  .columns-2,
+  .columns-3,
+  .columns-4,
+  .columns-5,
+  .columns-6 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

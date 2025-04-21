@@ -5,12 +5,13 @@ import "./MyRecipes.css";
 import { useLikedRecipes } from "./useLikedRecipes";
 import { useNavigate } from "react-router-dom";
 import { Recipe } from "../../types/recipe";
+import RecipeGrid from "../../components/RecipeGrid/RecipeGrid";
 
 function MyRecipes() {
   const [first, setFirst] = useState(0);
   const recipesPerPage = 18;
   const { recipes, loading, error, total } = useLikedRecipes(first, recipesPerPage) as {
-    recipes: Recipe[]; // Explicitly type the recipes array
+    recipes: Recipe[];
     loading: boolean;
     error: string | null;
     total: number;
@@ -23,21 +24,18 @@ function MyRecipes() {
 
   return (
     <div className="my-recipes-page">
-      <h1 className="fancy-header">Dein Rezeptbuch</h1>
+      <h1 className="my-recipes-header">Dein Rezeptbuch</h1>
       {loading && <p>Rezepte werden geladen...</p>}
       {error && <p>Fehler beim Laden der Rezepte: {error}</p>}
-      <div className="recipe-grid">
-        {recipes.length === 0 && !loading && !error && (
-          <p className="no-recipes-message">Noch keine Rezepte im Rezeptbuch.</p>
-        )}
-        {recipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            recipe={recipe}
-            onSelect={() => navigate(`/recipes/${recipe.id}`)}
-          />
-        ))}
-      </div>
+      {recipes.length === 0 && !loading && !error ? (
+        <p className="no-recipes-message">Noch keine Rezepte im Rezeptbuch.</p>
+      ) : (
+        <RecipeGrid
+          recipes={recipes}
+          onSelect={(recipe) => navigate(`/recipes/${recipe.id}`)}
+          columns={4}
+        />
+      )}
       <Paginator
         first={first}
         rows={recipesPerPage}
