@@ -6,6 +6,7 @@ import './RecipeSelectDialog.css';
 import RecipeCard from '../../../components/RecipeCard/RecipeCard';
 import { useState } from 'react';
 import { FaUtensils } from 'react-icons/fa'; // Import the React icon
+import RecipeGrid from '../../../components/RecipeGrid/RecipeGrid';
 
 interface RecipeSelectDialogProps {
   visible: boolean;
@@ -54,16 +55,15 @@ const RecipeSelectDialog = ({ visible, onHide, onSelect }: RecipeSelectDialogPro
           <p>Lade Rezepte...</p>
         ) : (
           <>
-            <div className="recipe-grid--compact">
-              {paginated.map((recipe) => (
-                <RecipeCard
-                  key={recipe.id}
-                  recipe={recipe}
-                  onSelect={() => onSelect(recipe)}
-                  compact
-                />
-              ))}
-            </div>
+            <RecipeGrid
+              recipes={paginated}
+              onSelect={(recipe) => {
+                onSelect(recipe);
+                onHide();
+              }}
+              compact
+              columns={4}
+            />
             <Paginator
               first={first}
               rows={rows}

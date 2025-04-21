@@ -29,15 +29,6 @@
   padding: 16px;
 }
 
-.recipe-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  margin-bottom: 2rem;
-  justify-content: start;
-  padding: 48px;
-}
-
 .recipe-card-content p {
   margin: 0;
   font-size: 18px;
@@ -72,14 +63,4 @@
 
 .recipe-card--compact .recipe-card-content p {
   font-size: 14px;
-}
-
-.recipe-grid--compact {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* exactly 4 columns */
-  max-width: calc(4 * 200px + 3 * 1.5rem); /* exact width for 4 cards + gaps */
-  gap: 1.5rem;
-  margin: 0 auto 1rem;
-  padding: 24px;
-  justify-content: center;
 }
