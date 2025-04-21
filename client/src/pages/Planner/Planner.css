@@ -31,3 +31,21 @@
   font-weight: 600;
   justify-content: center;
 }
+
+.meal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.meal-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 6px;
+  color: white;
+  font-size: 1rem;
+}

@@ -23,11 +23,11 @@ const daysOfWeek = [
 ];
 
 const mealTimes = [
-  { key: 'breakfast', label: 'Frühstück', icon: <MdFreeBreakfast /> },
-  { key: 'snack1', label: 'Snack 1', icon: <MdFastfood /> },
-  { key: 'lunch', label: 'Mittagessen', icon: <MdLocalDining /> },
-  { key: 'snack2', label: 'Snack 2', icon: <MdFastfood /> },
-  { key: 'dinner', label: 'Abendessen', icon: <MdDinnerDining /> },
+  { key: 'breakfast', label: 'Frühstück', icon: <MdFreeBreakfast />, color: '#FFB74D' },
+  { key: 'snack1', label: 'Snack 1', icon: <MdFastfood />, color: '#81C784' },
+  { key: 'lunch', label: 'Mittagessen', icon: <MdLocalDining />, color: '#64B5F6' },
+  { key: 'snack2', label: 'Snack 2', icon: <MdFastfood />, color: '#BA68C8' },
+  { key: 'dinner', label: 'Abendessen', icon: <MdDinnerDining />, color: '#E57373' },
 ];
 
 function groupEntries(entries: MealPlanEntry[]): {
@@ -130,7 +130,12 @@ function Planner() {
                 <tr key={meal.key}>
                   <td className="day-label">
                     <div className="meal-header">
-                      {meal.icon}
+                      <div
+                        className="meal-header-icon"
+                        style={{ backgroundColor: meal.color }}
+                      >
+                        {meal.icon}
+                      </div>
                       <span>{meal.label}</span>
                     </div>
                   </td>
