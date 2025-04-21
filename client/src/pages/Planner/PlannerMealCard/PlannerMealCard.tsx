@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDrag } from 'react-dnd';
 import { MealPlanEntry } from '../useMealPlan';
 import RecipeImage from '../../../components/RecipeImage/RecipeImage';
+import { MdClose } from 'react-icons/md';
 import './PlannerMealCard.css';
 
 interface PlannerMealCardProps {
@@ -9,9 +10,16 @@ interface PlannerMealCardProps {
   name: string;
   imageUrl?: string;
   highlight?: boolean;
+  onDelete: (id: number) => void;
 }
 
-const PlannerMealCard = ({ entry, name, imageUrl, highlight }: PlannerMealCardProps) => {
+const PlannerMealCard = ({
+  entry,
+  name,
+  imageUrl,
+  highlight,
+  onDelete,
+}: PlannerMealCardProps) => {
   const [, dragRef] = useDrag({
     type: 'MEAL_ENTRY',
     item: { entry },
@@ -30,6 +38,18 @@ const PlannerMealCard = ({ entry, name, imageUrl, highlight }: PlannerMealCardPr
       ref={dragElementRef}
       className={`planner-meal-card${highlight ? ' highlight' : ''}`}
     >
+      {onDelete && (
+        <button
+          className="delete-meal-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(entry.id);
+          }}
+        >
+          <MdClose />
+        </button>
+      )}
+
       <div className="planner-meal-image">
         {imageUrl ? <RecipeImage src={imageUrl} alt={name} /> : 'Kein Bild'}
       </div>

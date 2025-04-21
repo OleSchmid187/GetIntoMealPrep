@@ -14,10 +14,20 @@ interface PlannerCellProps {
   meals: MealPlanEntry[];
   onAdd: (mealType: string, day: string) => void;
   onMove: (id: number, mealType: mealType, date: string, position: number) => void;
+  onDelete?: (id: number) => void;
   lastAddedId?: number | null;
 }
 
-const PlannerCell = ({ mealType, day, weekOffset, meals, onAdd, onMove, lastAddedId }: PlannerCellProps) => {
+const PlannerCell = ({
+  mealType,
+  day,
+  weekOffset,
+  meals,
+  onAdd,
+  onMove,
+  onDelete,
+  lastAddedId,
+}: PlannerCellProps) => {
   const cellRef = useRef<HTMLTableDataCellElement | null>(null);
 
   const [, dropRef] = useDrop({
@@ -25,8 +35,7 @@ const PlannerCell = ({ mealType, day, weekOffset, meals, onAdd, onMove, lastAdde
     drop: (item: { entry: MealPlanEntry }) => {
       const dragged = item.entry;
 
-      const weekdayIndex = ['montag', 'dienstag', 'mittwoch', 'donnerstag', 'freitag', 'samstag', 'sonntag']
-        .indexOf(day);
+      const weekdayIndex = ['montag', 'dienstag', 'mittwoch', 'donnerstag', 'freitag', 'samstag', 'sonntag'].indexOf(day);
       const baseMonday = new Date();
       baseMonday.setDate(baseMonday.getDate() - ((baseMonday.getDay() + 6) % 7) + weekOffset * 7);
       const targetDate = new Date(baseMonday);
@@ -48,6 +57,7 @@ const PlannerCell = ({ mealType, day, weekOffset, meals, onAdd, onMove, lastAdde
             name={entry.recipe?.name || `Gericht ${index + 1}`}
             imageUrl={entry.recipe?.imageUrl}
             highlight={entry.id === lastAddedId}
+            onDelete={onDelete}
           />
         ))}
       </div>

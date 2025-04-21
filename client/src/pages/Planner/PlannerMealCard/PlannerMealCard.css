@@ -51,4 +51,30 @@
       transform: scale(1);
     }
   }
-  
+
+/* Delete-Button: Startet als unsichtbar */
+.delete-meal-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: white;
+  border: 1px solid #e57373;
+  color: #e57373;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Sichtbar machen beim Hover */
+.planner-meal-card:hover .delete-meal-button {
+  opacity: 1;
+  pointer-events: auto;
+}

@@ -145,6 +145,7 @@ function Planner() {
                       onMove={(id, mealType, date, position) =>
                         updateEntry(id, { mealType, date, position })
                       }
+                      onDelete={deleteEntry}
                       lastAddedId={lastAddedId}
                     />
                   ))}
