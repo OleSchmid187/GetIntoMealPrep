@@ -1,8 +1,11 @@
 import { Dialog } from 'primereact/dialog';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
+import { Paginator } from 'primereact/paginator';
 import { useRecipeSelectDialog } from './useRecipeSelectDialog';
+import './RecipeSelectDialog.css';
+import RecipeCard from '../../../components/RecipeCard/RecipeCard';
+import { useState } from 'react';
+import { FaUtensils } from 'react-icons/fa'; // Import the React icon
 
 interface RecipeSelectDialogProps {
   visible: boolean;
@@ -13,43 +16,64 @@ interface RecipeSelectDialogProps {
 const RecipeSelectDialog = ({ visible, onHide, onSelect }: RecipeSelectDialogProps) => {
   const { recipes, search, setSearch, loading } = useRecipeSelectDialog(visible);
 
+  const [first, setFirst] = useState(0);
+  const rows = 8;
+
   const header = (
-    <div className="flex justify-content-between">
-      <span className="p-input-icon-left">
-        <i className="pi pi-search" />
-        <InputText
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Rezept suchen..."
-        />
-      </span>
+    <div className="recipe-dialog-header">
+      <InputText
+        value={search}
+        onChange={(e) => {
+          setFirst(0); // Reset to first page on new search
+          setSearch(e.target.value);
+        }}
+        placeholder="Rezept suchen..."
+        className="recipe-dialog-search"
+      />
     </div>
   );
 
+  const paginated = recipes.slice(first, first + rows);
+
   return (
     <Dialog
-      header="Rezept auswählen"
       visible={visible}
-      style={{ width: '50vw' }}
+      style={{ width: '80vw', maxWidth: '960px', maxHeight: '90vh' }}
       onHide={onHide}
-      closable
+      className="recipe-select-dialog"
       draggable={false}
+      closable
+      modal
     >
-      <DataTable
-        value={recipes}
-        paginator
-        rows={10}
-        loading={loading}
-        header={header}
-        emptyMessage="Keine Rezepte gefunden."
-        selectionMode="single"
-        onSelectionChange={(e) => {
-          onSelect(e.value);
-          onHide();
-        }}
-      >
-        <Column field="name" header="Name" />
-      </DataTable>
+      <div className="dialog-title">
+        <FaUtensils className="dialog-title-icon" /> Rezept auswählen
+      </div>
+      <div className="dialog-content">
+        {header}
+        {loading ? (
+          <p>Lade Rezepte...</p>
+        ) : (
+          <>
+            <div className="recipe-grid--compact">
+              {paginated.map((recipe) => (
+                <RecipeCard
+                  key={recipe.id}
+                  recipe={recipe}
+                  onSelect={() => onSelect(recipe)}
+                  compact
+                />
+              ))}
+            </div>
+            <Paginator
+              first={first}
+              rows={rows}
+              totalRecords={recipes.length}
+              onPageChange={(e) => setFirst(e.first)}
+              className="recipe-dialog-paginator"
+            />
+          </>
+        )}
+      </div>
     </Dialog>
   );
 };

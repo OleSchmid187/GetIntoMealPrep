@@ -55,3 +55,39 @@
 .like-button {
   cursor: pointer;
 }
+
+/* 🔹 Compact Mode Style */
+.recipe-card--compact {
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+  transform: none;
+  transition: none;
+  padding: 4px;
+  width: 200px;
+}
+
+.recipe-card--compact .recipe-card-image img {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 6px 6px 0 0;
+}
+
+.recipe-card--compact .recipe-card-content {
+  padding: 8px;
+  font-size: 0.85rem;
+}
+
+.recipe-card--compact .recipe-card-content p {
+  font-size: 14px;
+}
+
+/* 🔹 Compact Recipe Grid Style */
+.recipe-grid--compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 24px;
+}
+

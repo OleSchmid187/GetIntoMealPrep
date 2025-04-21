@@ -1,0 +1,58 @@
+/* 🧠 Suchfeld zentriert und modern */
+.recipe-dialog-header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-dialog-search {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #f9f9f9;
+}
+
+.recipe-dialog-search:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  background-color: #fff;
+}
+
+/* 🎯 Dialog-Inhalt padding optimieren */
+.recipe-select-dialog .p-dialog-content {
+  padding: 2rem;
+  padding-top: 1rem;
+}
+
+/* 🧭 Paginator optisch mittig & spaced */
+.recipe-dialog-paginator {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* 🧩 Grid für compact mode */
+.recipe-grid--compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  justify-content: center;
+}
+
+.dialog-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #333333;
+}
+
+.dialog-title-icon {
+  color: #4a90e2; /* Change icon color */
+  margin-right: 0.5rem; /* Add spacing between icon and text */
+}
