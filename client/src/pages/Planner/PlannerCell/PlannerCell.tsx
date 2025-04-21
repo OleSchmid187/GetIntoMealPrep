@@ -14,7 +14,7 @@ interface PlannerCellProps {
   meals: MealPlanEntry[];
   onAdd: (mealType: string, day: string) => void;
   onMove: (id: number, mealType: mealType, date: string, position: number) => void;
-  onDelete?: (id: number) => void;
+  onDelete: (id: number) => void;
   lastAddedId?: number | null;
 }
 
