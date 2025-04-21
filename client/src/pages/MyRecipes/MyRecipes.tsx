@@ -10,7 +10,7 @@ function MyRecipes() {
   const [first, setFirst] = useState(0);
   const recipesPerPage = 18;
   const { recipes, loading, error, total } = useLikedRecipes(first, recipesPerPage) as {
-    recipes: Recipe[]; // Explicitly type the recipes array
+    recipes: Recipe[];
     loading: boolean;
     error: string | null;
     total: number;
@@ -23,7 +23,7 @@ function MyRecipes() {
 
   return (
     <div className="my-recipes-page">
-      <h1 className="fancy-header">Dein Rezeptbuch</h1>
+      <h1 className="my-recipes-header">Dein Rezeptbuch</h1>
       {loading && <p>Rezepte werden geladen...</p>}
       {error && <p>Fehler beim Laden der Rezepte: {error}</p>}
       <div className="recipe-grid">
