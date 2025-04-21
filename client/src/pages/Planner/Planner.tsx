@@ -10,6 +10,7 @@ import WeekSwitcher from './WeekSwitcher/WeekSwitcher';
 import { useMealPlan, MealPlanEntry } from './useMealPlan';
 import { mealType } from '../../types/mealType';
 import PlannerCell from './PlannerCell/PlannerCell';
+import RecipeSelectDialog from './RecipeSelectDialog/RecipeSelectDialog';
 
 const daysOfWeek = [
   { key: 'montag', label: 'Montag' },
@@ -53,6 +54,9 @@ function groupEntries(entries: MealPlanEntry[]): {
 
 function Planner() {
   const [weekOffset, setWeekOffset] = useState(0);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [selectedMealTime, setSelectedMealTime] = useState<mealType | null>(null);
+  const [selectedDayKey, setSelectedDayKey] = useState<string | null>(null);
 
   const {
     entries,
@@ -65,23 +69,32 @@ function Planner() {
   const plan: { [key: string]: MealPlanEntry[] } = groupEntries(entries);
 
   const handleAddMeal = (mealTime: string, dayKey: string) => {
-    alert(`Dialog öffnen für ${mealTime} - ${dayKey}`);
+    setSelectedMealTime(mealTime as mealType);
+    setSelectedDayKey(dayKey);
+    setDialogVisible(true);
+  };
 
-    const fakeRecipeId = 1;
-    const weekdayIndex = daysOfWeek.findIndex((d) => d.key === dayKey);
+  const handleRecipeSelect = (recipe: { id: number }) => {
+    if (!selectedMealTime || !selectedDayKey) return;
+  
+    const weekdayIndex = daysOfWeek.findIndex((d) => d.key === selectedDayKey);
     const baseMonday = new Date();
     baseMonday.setDate(
       baseMonday.getDate() - ((baseMonday.getDay() + 6) % 7) + weekOffset * 7
     );
     const date = new Date(baseMonday);
     date.setDate(baseMonday.getDate() + weekdayIndex);
-
+  
     addEntry({
-      recipeId: fakeRecipeId,
-      mealType: mealTime as mealType,
-      position: plan[`${mealTime}-${dayKey}`]?.length || 0,
+      recipeId: recipe.id,
+      mealType: selectedMealTime,
+      position: plan[`${selectedMealTime}-${selectedDayKey}`]?.length || 0,
       date: date.toISOString().split('T')[0],
     });
+  
+    setDialogVisible(false);
+    setSelectedMealTime(null);
+    setSelectedDayKey(null);
   };
 
   return (
@@ -134,6 +147,11 @@ function Planner() {
           </table>
         )}
       </div>
+        <RecipeSelectDialog
+          visible={dialogVisible}
+          onHide={() => setDialogVisible(false)}
+          onSelect={handleRecipeSelect}
+/>
     </div>
   );
 }

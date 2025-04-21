@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLogto } from '@logto/react';
 import { mealType } from '../../types/mealType';
+import { sortMealPlanEntries } from '../../utils/sortMealPlanEntries';
 
 export interface MealPlanEntry {
   id: number;
@@ -46,7 +47,7 @@ export function useMealPlan(weekOffset: number) {
     fetchEntries();
   }, [token, weekOffset]);
 
-  // 🔁 Entries nachladen
+  // Entries nachladen
   const fetchEntries = async () => {
     setLoading(true);
     try {
@@ -63,28 +64,35 @@ export function useMealPlan(weekOffset: number) {
     }
   };
 
-  // Gericht hinzufügen → danach neu laden
+  // Gericht hinzufügen
   const addEntry = async (entry: Omit<MealPlanEntry, 'id'>) => {
     if (!token) return;
-
-    await axios.post('/api/mealplan', entry, {
+  
+    const res = await axios.post('/api/mealplan', entry, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    await fetchEntries(); // ⬅️ aktualisiert den State mit vollständigen Rezepten
+  
+    // ⬅️ Direkt ins lokale State einfügen
+    setEntries((prev) => [...prev, res.data]);
   };
 
   // Gericht verschieben
   const updateEntry = async (id: number, updated: Partial<MealPlanEntry>) => {
     if (!token) return;
-
+  
     const res = await axios.put(`/api/mealplan/${id}`, { ...updated, id }, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
-    setEntries((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, ...res.data } : e))
-    );
+  
+    setEntries((prev) => {
+      const updatedEntry = res.data;
+  
+      const updatedList = prev.map((e) =>
+        e.id === id ? { ...e, ...updatedEntry } : e
+      );
+  
+      return sortMealPlanEntries(updatedList);
+    });
   };
 
   // Gericht löschen
@@ -107,3 +115,4 @@ export function useMealPlan(weekOffset: number) {
     deleteEntry,
   };
 }
+

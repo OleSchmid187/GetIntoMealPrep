@@ -4,6 +4,7 @@
   padding: 0.75rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   min-height: 140px;
+  min-width: 140px;
   position: relative;
   transition: background-color 0.2s ease;
   vertical-align: top; /* Ensure cell aligns properly */

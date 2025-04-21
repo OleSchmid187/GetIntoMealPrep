@@ -1,5 +1,6 @@
 .planner-page {
   padding: 2rem;
+  position: relative;
 }
 
 .planner-table {
