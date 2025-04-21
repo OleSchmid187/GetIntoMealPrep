@@ -3,7 +3,6 @@ import { InputText } from 'primereact/inputtext';
 import { Paginator } from 'primereact/paginator';
 import { useRecipeSelectDialog } from './useRecipeSelectDialog';
 import './RecipeSelectDialog.css';
-import RecipeCard from '../../../components/RecipeCard/RecipeCard';
 import { useState } from 'react';
 import { FaUtensils } from 'react-icons/fa'; // Import the React icon
 import RecipeGrid from '../../../components/RecipeGrid/RecipeGrid';

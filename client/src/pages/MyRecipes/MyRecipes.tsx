@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Paginator } from "primereact/paginator";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./MyRecipes.css";
 import { useLikedRecipes } from "./useLikedRecipes";
 import { useNavigate } from "react-router-dom";
