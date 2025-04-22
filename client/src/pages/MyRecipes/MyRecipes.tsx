@@ -8,7 +8,7 @@ import RecipeGrid from "../../components/RecipeGrid/RecipeGrid";
 
 function MyRecipes() {
   const [first, setFirst] = useState(0);
-  const recipesPerPage = 18;
+  const recipesPerPage = 8;
   const { recipes, loading, error, total } = useLikedRecipes(first, recipesPerPage) as {
     recipes: Recipe[];
     loading: boolean;

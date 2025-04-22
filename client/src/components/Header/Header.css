@@ -29,3 +29,35 @@
   transform: scale(1.05);
   opacity: 0.9;
 }
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    position: relative; /* Enables absolute positioning inside */
+  }
+
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .profile-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.2rem;
+    margin: 0;
+  }
+
+  .header-dashboard-button,
+  .header-start-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}
