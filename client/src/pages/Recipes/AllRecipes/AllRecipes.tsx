@@ -7,7 +7,7 @@ import RecipeGrid from "../../../components/RecipeGrid/RecipeGrid";
 
 function AllRecipes() {
   const [first, setFirst] = useState(0);
-  const recipesPerPage = 9;
+  const recipesPerPage = 8;
   const { recipes, loading, error, total } = useAllRecipes(first, recipesPerPage);
   const navigate = useNavigate();
 

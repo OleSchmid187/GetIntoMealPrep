@@ -104,67 +104,69 @@ function Planner() {
   };
 
   return (
-    <div className="planner-page">
-      <div className="dashboard-panel">
-        <h3>Wochenplan</h3>
-        <WeekSwitcher weekOffset={weekOffset} setWeekOffset={setWeekOffset} />
+    <div className="planner-scroll-container">
+      <div className="planner-page">
+        <div className="dashboard-panel">
+          <h3>Wochenplan</h3>
+          <WeekSwitcher weekOffset={weekOffset} setWeekOffset={setWeekOffset} />
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <table className="planner-table">
-            <thead>
-              <tr>
-                <th></th>
-                {daysOfWeek.map((day) => (
-                  <th key={day.key}>
-                    <div className="meal-header">
-                      <span>{day.label}</span>
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {mealTimes.map((meal) => (
-                <tr key={meal.key}>
-                  <td className="day-label">
-                    <div className="meal-header">
-                      <div
-                        className="meal-header-icon"
-                        style={{ backgroundColor: meal.color }}
-                      >
-                        {meal.icon}
-                      </div>
-                      <span>{meal.label}</span>
-                    </div>
-                  </td>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <table className="planner-table">
+              <thead>
+                <tr>
+                  <th></th>
                   {daysOfWeek.map((day) => (
-                    <PlannerCell
-                      key={`${meal.key}-${day.key}`}
-                      mealType={meal.key as mealType}
-                      day={day.key}
-                      weekOffset={weekOffset}
-                      meals={plan[`${meal.key}-${day.key}`] || []}
-                      onAdd={handleAddMeal}
-                      onMove={(id, mealType, date, position) =>
-                        updateEntry(id, { mealType, date, position })
-                      }
-                      onDelete={deleteEntry}
-                      lastAddedId={lastAddedId}
-                    />
+                    <th key={day.key}>
+                      <div className="meal-header">
+                        <span>{day.label}</span>
+                      </div>
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+              </thead>
+              <tbody>
+                {mealTimes.map((meal) => (
+                  <tr key={meal.key}>
+                    <td className="day-label">
+                      <div className="meal-header">
+                        <div
+                          className="meal-header-icon"
+                          style={{ backgroundColor: meal.color }}
+                        >
+                          {meal.icon}
+                        </div>
+                        <span>{meal.label}</span>
+                      </div>
+                    </td>
+                    {daysOfWeek.map((day) => (
+                      <PlannerCell
+                        key={`${meal.key}-${day.key}`}
+                        mealType={meal.key as mealType}
+                        day={day.key}
+                        weekOffset={weekOffset}
+                        meals={plan[`${meal.key}-${day.key}`] || []}
+                        onAdd={handleAddMeal}
+                        onMove={(id, mealType, date, position) =>
+                          updateEntry(id, { mealType, date, position })
+                        }
+                        onDelete={deleteEntry}
+                        lastAddedId={lastAddedId}
+                      />
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+          <RecipeSelectDialog
+            visible={dialogVisible}
+            onHide={() => setDialogVisible(false)}
+            onSelect={handleRecipeSelect}
+        />
       </div>
-        <RecipeSelectDialog
-          visible={dialogVisible}
-          onHide={() => setDialogVisible(false)}
-          onSelect={handleRecipeSelect}
-/>
     </div>
   );
 }

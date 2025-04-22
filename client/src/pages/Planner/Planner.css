@@ -1,6 +1,7 @@
 .planner-page {
   padding: 2rem;
   position: relative;
+  min-width: 1300px;
 }
 
 .planner-table {
@@ -8,6 +9,12 @@
   border-collapse: separate;
   border-spacing: 0.5rem;
   table-layout: fixed;
+  min-width: 1000px;
+}
+
+.planner-scroll-container {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .planner-table th {
