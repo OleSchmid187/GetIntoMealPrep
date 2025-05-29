@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button Component > Snapshot Testing > matches snapshot with all props 1`] = `
+<button
+  class="ui-button ui-button--large ui-button--secondary custom-class"
+  type="submit"
+>
+  Full Props Button
+</button>
+`;
+
+exports[`Button Component > Snapshot Testing > matches snapshot with default props 1`] = `
+<button
+  class="ui-button ui-button--medium ui-button--primary"
+  type="button"
+>
+  Default Button
+</button>
+`;
