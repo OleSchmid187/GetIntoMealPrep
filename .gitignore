@@ -1,3 +1,7 @@
 ﻿client/node_modules
 GetIntoMealPrepAPI/bin
 GetIntoMealPrepAPI/obj
+
+# Coverage reports
+client/coverage/
+client/.nyc_output/

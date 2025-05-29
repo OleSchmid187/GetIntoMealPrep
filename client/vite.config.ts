@@ -27,7 +27,14 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       exclude: [
         'node_modules/',
-        'src/test/',
+        'src/test/', // This already covers setupTests.ts if it's in src/test/
+        'dist/**',                // Excludes the dist folder
+        'eslint.config.js',       // Excludes eslint.config.js at client/eslint.config.js
+        'vite.config.ts',         // Excludes this Vite config file itself
+        'src/main.tsx',           // Excludes the main application entry point
+        'src/vite-env.d.ts',      // Excludes TypeScript definition files
+        'src/config/**',          // Excludes all files in the src/config directory
+        // Add any other files or patterns you wish to exclude
       ],
     },
   },
