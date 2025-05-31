@@ -1,4 +1,4 @@
-# 🥗 GetIntoMealPrep – Fullstack Web App
+# GetIntoMealPrep – Fullstack Web App
 
 **GetIntoMealPrep** is a fullstack web application designed to make meal prepping simple and efficient.
 
@@ -13,7 +13,7 @@ Users can:
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 **Backend:**
 
@@ -45,18 +45,11 @@ The backend API is protected by **Bearer Token Authentication**.
 
 ---
 
-## 📦 Developer Setup
+## Developer Setup
 
 The full developer setup using Docker is described in:
 
 👉 [GetIntoMealPrep_Developer_Setup_Guide.md](./GetIntoMealPrep_Developer_Setup_Guide.md)
-
-Key commands:
-
-```bash
-docker compose up
-dotnet ef database update --project GetIntoMealPrepAPI
-```
 
 The setup includes:
 
@@ -66,7 +59,7 @@ The setup includes:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 The frontend is tested with **Vitest**.
 
@@ -96,7 +89,67 @@ All files                                          |   98.17 |    97.99 |    95.
  src/components/LikeButton                         |     100 |     97.5 |     100 |     100 |                  
   LikeButton.tsx                                   |     100 |    96.15 |     100 |     100 | 56               
   useRecipeLikeStatus.ts                           |     100 |      100 |     100 |     100 |                  
-...
+ src/components/ProtectedRoute                     |     100 |      100 |     100 |     100 |                  
+  ProtectedRoute.tsx                               |     100 |      100 |     100 |     100 |                  
+ src/components/RecipeCard                         |     100 |      100 |     100 |     100 |                  
+  RecipeCard.tsx                                   |     100 |      100 |     100 |     100 |                  
+ src/components/RecipeGrid                         |     100 |      100 |     100 |     100 |                  
+  RecipeGrid.tsx                                   |     100 |      100 |     100 |     100 |                  
+ src/components/RecipeImage                        |     100 |      100 |     100 |     100 |                  
+  RecipeImage.tsx                                  |     100 |      100 |     100 |     100 |                  
+ src/pages/Dashboard                               |     100 |      100 |     100 |     100 |                  
+  Dashboard.tsx                                    |     100 |      100 |     100 |     100 |                  
+ src/pages/Dashboard/DashboardCards                |     100 |      100 |     100 |     100 |                  
+  DashboardCards.tsx                               |     100 |      100 |     100 |     100 |                  
+ src/pages/Dashboard/DashboardPanel                |     100 |      100 |     100 |     100 |                  
+  DashboardPanel.tsx                               |     100 |      100 |     100 |     100 |                  
+ src/pages/Dashboard/DashboardStats                |     100 |      100 |     100 |     100 |                  
+  DashboardStats.tsx                               |     100 |      100 |     100 |     100 |                  
+ src/pages/Dashboard/RecipeSuggestions             |     100 |      100 |     100 |     100 |                  
+  RecipeSuggestions.tsx                            |     100 |      100 |     100 |     100 |                  
+  useRecipeSuggestions.ts                          |     100 |      100 |     100 |     100 |                  
+ src/pages/Dashboard/RecipeSuggestions/RecipeModal |     100 |      100 |     100 |     100 |                  
+  RecipeModal.tsx                                  |     100 |      100 |     100 |     100 |                  
+ src/pages/Home                                    |     100 |      100 |     100 |     100 |                  
+  Home.tsx                                         |     100 |      100 |     100 |     100 |                  
+ src/pages/Home/CTASection                         |     100 |      100 |     100 |     100 |                  
+  CTASection.tsx                                   |     100 |      100 |     100 |     100 |                  
+ src/pages/Home/FeatureSection                     |     100 |      100 |     100 |     100 |                  
+  FeatureSection.tsx                               |     100 |      100 |     100 |     100 |                  
+ src/pages/Home/HeroSection                        |     100 |      100 |     100 |     100 |                  
+  HeroSection.tsx                                  |     100 |      100 |     100 |     100 |                  
+ src/pages/MyRecipes                               |     100 |      100 |     100 |     100 |                  
+  MyRecipes.tsx                                    |     100 |      100 |     100 |     100 |                  
+  useLikedRecipes.ts                               |     100 |      100 |     100 |     100 |                  
+ src/pages/Planner                                 |   89.23 |    88.88 |   63.63 |   89.23 |                  
+  Planner.tsx                                      |   80.55 |      100 |   33.33 |   80.55 | 73-76,79-104,152 
+  useMealPlan.ts                                   |     100 |    85.71 |     100 |     100 | 35,48,90,126,145 
+ src/pages/Planner/PlannerCell                     |     100 |      100 |     100 |     100 |                  
+  PlannerCell.tsx                                  |     100 |      100 |     100 |     100 |                  
+ src/pages/Planner/PlannerMealCard                 |     100 |      100 |     100 |     100 |                  
+  PlannerMealCard.tsx                              |     100 |      100 |     100 |     100 |                  
+ src/pages/Planner/RecipeSelectDialog              |     100 |      100 |     100 |     100 |                  
+  RecipeSelectDialog.tsx                           |     100 |      100 |     100 |     100 |                  
+  useRecipeSelectDialog.ts                         |     100 |      100 |     100 |     100 |                  
+ src/pages/Planner/WeekSwitcher                    |     100 |      100 |     100 |     100 |                  
+  WeekSwitcher.tsx                                 |     100 |      100 |     100 |     100 |                  
+ src/pages/Profil                                  |     100 |      100 |     100 |     100 |                  
+  Profil.tsx                                       |     100 |      100 |     100 |     100 |                  
+ src/pages/Recipes/AllRecipes                      |     100 |      100 |     100 |     100 |                  
+  AllRecipes.tsx                                   |     100 |      100 |     100 |     100 |                  
+  useAllRecipes.ts                                 |     100 |      100 |     100 |     100 |                  
+ src/pages/Recipes/RecipeDetails                   |     100 |      100 |     100 |     100 |                  
+  RecipeDetails.tsx                                |     100 |      100 |     100 |     100 |                  
+  useRecipeDetails.ts                              |     100 |      100 |     100 |     100 |                  
+ src/types                                         |     100 |      100 |     100 |     100 |                  
+  mealType.ts                                      |     100 |      100 |     100 |     100 |                  
+  recipe.ts                                        |     100 |      100 |     100 |     100 |                  
+ src/utils                                         |     100 |      100 |     100 |     100 |                  
+  dateUtils.ts                                     |     100 |      100 |     100 |     100 |                  
+  getImageUrl.ts                                   |     100 |      100 |     100 |     100 |                  
+  sortMealPlanEntries.ts                           |     100 |      100 |     100 |     100 |                  
+  useProfileData.ts                                |     100 |      100 |     100 |     100 |                  
+---------------------------------------------------|---------|----------|---------|---------|-------------------
 ```
 
 ---
