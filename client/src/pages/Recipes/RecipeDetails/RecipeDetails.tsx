@@ -3,7 +3,7 @@ import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import { Divider } from "primereact/divider";
 import { useRecipeDetails } from "./useRecipeDetails";
-import { LikeButton } from "../../../components/LikeButton/LikeButton"; // <--- NEUE Komponente!
+import { LikeButton } from "../../../components/LikeButton/LikeButton";
 import "./RecipeDetails.css";
 
 function RecipeDetails() {

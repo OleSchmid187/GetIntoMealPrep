@@ -12,7 +12,7 @@ interface PlannerCellProps {
   day: string;
   weekOffset: number;
   meals: MealPlanEntry[];
-  onAdd: (mealType: string, day: string) => void;
+  onAdd: (mealType: mealType, day: string) => void;
   onMove: (id: number, mealType: mealType, date: string, position: number) => void;
   onDelete: (id: number) => void;
   lastAddedId?: number | null;
@@ -62,7 +62,7 @@ const PlannerCell = ({
         ))}
       </div>
       <div className="add-button-wrapper">
-        <button className="add-button" onClick={() => onAdd(mealType, day)}>
+        <button className="add-button" onClick={() => onAdd(mealType, day)} aria-label="add">
           <MdAdd />
         </button>
       </div>
