@@ -12,6 +12,7 @@ export function useAllRecipes(start: number, limit: number) {
 
   useEffect(() => {
     const load = async () => {
+      setLoading(true); // Reset loading state on each fetch attempt
       try {
         const token = await getIdToken();
         const res = await axios.get(`/api/recipe?start=${start}&limit=${limit}`, {

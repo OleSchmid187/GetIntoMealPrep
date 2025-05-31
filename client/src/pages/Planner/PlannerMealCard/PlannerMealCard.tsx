@@ -45,6 +45,7 @@ const PlannerMealCard = ({
             e.stopPropagation();
             onDelete(entry.id);
           }}
+          aria-label={`Delete ${name}`}
         >
           <MdClose />
         </button>

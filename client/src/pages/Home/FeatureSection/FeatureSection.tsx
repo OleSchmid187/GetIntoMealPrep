@@ -5,9 +5,10 @@ import feature3 from "../../../assets/feature3.jpg";
 import "./FeatureSection.css";
 
 function FeaturesSection() {
+  const headingId = "features-section-heading"; // Unique ID for the heading
   return (
-    <section className="home-features-section">
-      <h2>So funktioniert’s</h2>
+    <section className="home-features-section" aria-labelledby={headingId}>
+      <h2 id={headingId}>So funktioniert’s</h2>
       <div className="home-features-grid">
         <div className="home-feature">
           <img src={feature1} alt="Wochenplan erstellen" />

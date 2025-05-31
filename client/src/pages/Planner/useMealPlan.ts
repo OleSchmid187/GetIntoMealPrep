@@ -19,50 +19,86 @@ export interface MealPlanEntry {
 
 export function useMealPlan(weekOffset: number) {
   const { getIdToken } = useLogto();
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null | undefined>(undefined); // undefined: initial, null: no token/auth error, string: token
   const [entries, setEntries] = useState<MealPlanEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // True initially as we attempt to load token/data
   const [error, setError] = useState<string | null>(null);
 
   // Token laden
   useEffect(() => {
+    let isMounted = true;
+    setLoading(true); // Indicate loading process starts or restarts
+    setError(null);   // Clear previous errors
+
     getIdToken()
-      .then((token) => {
-        if (token !== undefined) {
-          setToken(token);
-        } else {
-          throw new Error('Token is undefined');
+      .then((fetchedToken) => {
+        if (!isMounted) return;
+
+        if (fetchedToken) { // Token is a non-empty string
+          setToken(fetchedToken);
+          // setLoading(true) is already set. Data loading useEffect will handle further state.
+        } else { // Token is null, undefined, or empty string from getIdToken
+          setToken(null); // Standardize to null for "no valid token"
+          setError("Authentifizierung fehlgeschlagen");
+          setEntries([]); // Clear entries as auth failed
+          setLoading(false); // No data fetching will occur
         }
       })
       .catch((err) => {
+        if (!isMounted) return;
         console.error('Token-Fehler:', err);
+        setToken(null); // Ensure token is null on error
         setError('Authentifizierung fehlgeschlagen');
+        setEntries([]); // Clear entries on error
         setLoading(false);
       });
+    
+    return () => {
+      isMounted = false;
+    };
   }, [getIdToken]);
 
-  // Daten laden
+  // Daten laden (triggered by token change or weekOffset change)
   useEffect(() => {
-    if (!token) return;
-    fetchEntries();
-  }, [token, weekOffset]);
+    let isMounted = true;
 
-  // Entries nachladen
-  const fetchEntries = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get('/api/mealplan', {
-        params: { weekOffset },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setEntries(res.data);
-    } catch (err) {
-      console.error('Fehler beim Laden des Mealplans', err);
-      setError('Fehler beim Laden des Mealplans');
-    } finally {
-      setLoading(false);
-    }
-  };
+    const loadData = async () => {
+      if (token) { // Only if token is a valid string
+        setLoading(true); // Explicitly set loading for data fetch
+        setError(null);
+        try {
+          const res = await axios.get('/api/mealplan', {
+            params: { weekOffset },
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (isMounted) {
+            setEntries(res.data);
+            setLoading(false);
+          }
+        } catch (err) {
+          if (isMounted) {
+            console.error('Fehler beim Laden des Mealplans', err);
+            setError('Fehler beim Laden des Mealplans');
+            setEntries([]); // Clear entries on fetch error
+            setLoading(false);
+          }
+        }
+      } else if (token === null) {
+        // Token is explicitly null (auth failed or no token from getIdToken in the previous effect)
+        // State (entries, error, loading) should have been set by the token loading effect.
+        // Ensure entries are clear if not already.
+        if (isMounted && entries.length > 0) setEntries([]);
+        // setLoading(false) and setError should be handled by the token effect.
+      }
+      // If token is undefined (initial state), do nothing, wait for token useEffect to set it.
+    };
+
+    loadData();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [token, weekOffset]);
 
   // Gericht hinzufügen
   const addEntry = async (entry: Omit<MealPlanEntry, 'id'>): Promise<MealPlanEntry | null> => {

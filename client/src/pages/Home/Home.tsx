@@ -9,7 +9,7 @@ function Home() {
   
   return (
     <>
-      <div className="home-container">
+      <div className="home-container" data-testid="home-container">
         <HeroSection />
         <FeaturesSection />
         <CTASection />
